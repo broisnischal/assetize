@@ -5,3 +5,5 @@ console.log("init :rocket");
 function run() {
   console.log("init :rocket");
 }
+
+export { run };
