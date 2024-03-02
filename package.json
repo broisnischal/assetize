@@ -6,10 +6,15 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "bin": {
+    " ": "dist/main.js"
+  },
   "scripts": {
     "test": "vitest run",
     "build": "tsup src/index.ts --format cjs,esm  --dts",
     "lint": "tsc",
+    "test:setup": "yarn unlink --global assetize && yarn link --global assetize",
+    "setup": "chmod +x ./dist/main.js",
     "release": "pnpm run lint && pnpm run test && pnpm run build && changeset publish"
   },
   "keywords": [],
@@ -23,5 +28,10 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "@types/node": "^20.11.24",
+    "picocolors": "^1.0.0"
   }
 }
