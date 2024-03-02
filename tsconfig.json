@@ -21,5 +21,12 @@
       "dom",
       "dom.iterable"
     ],
-  }
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
