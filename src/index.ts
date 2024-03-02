@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-console.log("init :rocket");
+console.log("init change");
 
 function run() {
-  console.log("init :rocket");
+  console.log("init :rocket clas");
 }
 
 export { run };

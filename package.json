@@ -7,11 +7,13 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "bin": {
-    " ": "dist/main.js"
+    "assetize": "./dist/index.js",
+    "assetize-cli": "./dist/main.js"
   },
   "scripts": {
+    "dev": "tsup src/** --watch",
     "test": "vitest run",
-    "build": "tsup src/index.ts --format cjs,esm  --dts",
+    "build": "tsup src/** --format cjs,esm  --dts",
     "lint": "tsc",
     "test:setup": "yarn unlink --global assetize && yarn link --global assetize",
     "setup": "chmod +x ./dist/main.js",
