@@ -2,14 +2,24 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
-    "target": "ES2016",
-    "module": "commonjs",
+    "target": "ES2022",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
+    "removeComments": true,
+    "verbatimModuleSyntax": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
     "noEmit": true,
-    "removeComments": true
+    "lib": [
+      "es2022",
+      "dom",
+      "dom.iterable"
+    ],
   }
 }
