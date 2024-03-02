@@ -9,7 +9,7 @@
     "test": "vitest run",
     "build": "tsup src/index.ts --format cjs,esm  --dts",
     "lint": "tsc",
-    "release": "pnpm run lint && pnpm run test && pnpm run build && changeset publish"
+    "release": "pnpm run lint && pnpm run test && pnpm run build && pnpm changeset publish"
   },
   "keywords": [],
   "author": "",
