@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 
-console.log("init change asdf");
+import { Generator } from "./utils";
 
-function run() {
-  console.log("init :rocket clas");
+async function main() {
+  console.clear();
+
+  const generator = new Generator("./assets", ".");
+
+  generator.generateAssetsFile("./assets");
 }
 
-export { run };
+main().catch(console.error);
