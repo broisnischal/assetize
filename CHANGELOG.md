@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+- a28f792: mini
+
+## 0.0.2
+
+### Patch Changes
+
 - 61acbc8: Changes
 
 ## 0.0.2
