@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.3
+
+### Patch Changes
+
+- 9db8187: minor-test change
+
 ## 0.0.2
 
 ### Patch Changes
