@@ -8,4 +8,9 @@
 
 <!-- [![GitHub release](https://img.shields.io/github/release/assetize/assetize.svg)](https://github.com/assetize/assetize/releases) -->
 
-image, audios, icons, videos, fonts,
+<!-- // AssetsImage
+// AssetsIcons
+// AssetsAudios
+// AssetsVideos
+// AssetsStyles
+// AssetsFonts -->
