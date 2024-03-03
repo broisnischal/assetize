@@ -24,6 +24,7 @@
   "license": "ISC",
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
+    "@types/lodash": "^4.14.202",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3",
     "vitest": "^1.3.1"
@@ -34,6 +35,7 @@
   "dependencies": {
     "@clack/prompts": "^0.7.0",
     "@types/node": "^20.11.24",
+    "lodash": "^4.17.21",
     "picocolors": "^1.0.0",
     "prettier": "^3.2.5"
   }
