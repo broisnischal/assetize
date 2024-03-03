@@ -2,12 +2,16 @@
 
 // import { Generator } from "./utils";
 
-// async function main() {
-//   console.clear();
+import { loadUserConfig } from "./generator/generator";
 
-//   const generator = new Generator("./assets", ".");
+async function main() {
+  console.clear();
 
-//   generator.generateAssetsFile("./assets");
-// }
+  const userConfig = loadUserConfig();
+  console.log(userConfig);
+  // const generator = new Generator("./assets", ".");
 
-// main().catch(console.error);
+  // generator.generateAssetsFile("./assets");
+}
+
+main().catch(console.error);
