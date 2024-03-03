@@ -9,7 +9,7 @@ import type { AssetizeConfig } from "../config/assetize.config";
 export async function loadUserConfig(): Promise<AssetizeConfig> {
   const rootDir = process.cwd(); // Get the root directory of the user's project
 
-  const configPath = path.join(rootDir, "assetize.config.ts");
+  const configPath = path.join(rootDir, "assetize.config");
 
   let config: AssetizeConfig;
 
