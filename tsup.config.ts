@@ -8,5 +8,5 @@ export default defineConfig({
   skipNodeModulesBundle: true,
   clean: true,
   minify: true,
-  splitting: false,
+  // splitting: false,
 });

@@ -2,6 +2,6 @@ import { defineAssetizeConfig } from "./src/config/assetize.config";
 
 export default defineAssetizeConfig({
   codebase: "vue",
-  publicDirectory: "./assets",
+  publicDirectory: "./fadsf",
   mainVueAssetPath: "./assets",
 });
