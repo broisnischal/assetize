@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import prettier from "prettier";
+import { AssetsSvgsGen } from "./icons";
 
 export class Generator {
   private readonly mainAssetPath: string;
@@ -82,3 +83,10 @@ export class Generator {
 // AssetsVideos
 // AssetsStyles
 // AssetsFonts
+
+class MyAssets {
+  private constructor() {}
+
+  static readonly icons: AssetsSvgsGen = new AssetsSvgsGen();
+  // static readonly images: AssetsImagesGen = new AssetsImagesGen();
+}
