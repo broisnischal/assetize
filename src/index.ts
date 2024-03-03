@@ -7,7 +7,7 @@ import { loadUserConfig } from "./generator/generator";
 async function main() {
   console.clear();
 
-  const userConfig = loadUserConfig();
+  const userConfig = await loadUserConfig();
   console.log(userConfig);
   // const generator = new Generator("./assets", ".");
 

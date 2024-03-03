@@ -6,7 +6,7 @@ import path from "node:path";
 import prettier from "prettier";
 import type { AssetizeConfig } from "../config/assetize.config";
 
-export function loadUserConfig(): AssetizeConfig {
+export async function loadUserConfig(): Promise<AssetizeConfig> {
   const rootDir = process.cwd(); // Get the root directory of the user's project
 
   const configPath = path.join(rootDir, "assetize.config.ts");
@@ -15,7 +15,8 @@ export function loadUserConfig(): AssetizeConfig {
 
   try {
     // Dynamically import the user's configuration file
-    const userConfigModule = require(configPath);
+    const userConfigModule = await import(configPath);
+
     config = userConfigModule.default || userConfigModule; // Handle ES6 default exports
   } catch (error) {
     console.error("Error loading user configuration:", error);
@@ -28,8 +29,13 @@ export function loadUserConfig(): AssetizeConfig {
   return config;
 }
 
-const userConfig = loadUserConfig();
-console.log(userConfig);
+async function main() {
+  const userConfig = await loadUserConfig();
+  console.log(userConfig);
+}
+
+main().catch(console.error);
+
 // let userConfig = import("../../assetize.config");
 
 // async function main() {
