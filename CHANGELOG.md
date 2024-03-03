@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.7
+
+### Patch Changes
+
+- 1f57d72: changes
+
 ## 0.0.6
 
 ### Patch Changes
