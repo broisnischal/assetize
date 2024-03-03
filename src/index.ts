@@ -2,12 +2,12 @@
 
 // import { Generator } from "./utils";
 
-import { loadUserConfig } from "./generator/generator";
+import { loadConfig } from "./generator/generator";
 
 async function main() {
   console.clear();
 
-  const userConfig = await loadUserConfig();
+  const userConfig = loadConfig(undefined, "./assetize.config.ts");
   console.log(userConfig);
   // const generator = new Generator("./assets", ".");
 

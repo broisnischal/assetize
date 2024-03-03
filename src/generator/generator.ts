@@ -5,36 +5,48 @@ import fs from "node:fs";
 import path from "node:path";
 import prettier from "prettier";
 import type { AssetizeConfig } from "../config/assetize.config";
+import { cosmiconfig } from "cosmiconfig";
 
-export async function loadUserConfig(): Promise<AssetizeConfig> {
-  const rootDir = process.cwd(); // Get the root directory of the user's project
+// const explorer = cosmiconfig("assetize");
+// console.log(explorer.search());
 
-  const configPath = path.join(rootDir, "assetize.config");
+// export async function loadUserConfig() {
+// const rootDir = process.cwd(); // Get the root directory of the user's project
 
-  let config: AssetizeConfig;
+// console.log(rootDir);
 
-  try {
-    // Dynamically import the user's configuration file
-    const userConfigModule = await import(configPath);
+// const configPath = path.join(rootDir, "assetize.config.js");
 
-    config = userConfigModule.default || userConfigModule; // Handle ES6 default exports
-  } catch (error) {
-    console.error("Error loading user configuration:", error);
-    config = {
-      outputFile: "gen.ts",
-      codebase: "remix",
-    }; // Fallback to default configuration
-  }
+// console.log(configPath);
 
-  return config;
-}
+// let config: AssetizeConfig;
 
-async function main() {
-  const userConfig = await loadUserConfig();
-  console.log(userConfig);
-}
+// try {
+//   // Dynamically import the user's configuration file
+//   const userConfigModule = await import(configPath);
 
-main().catch(console.error);
+//   config = userConfigModule.default || userConfigModule; // Handle ES6 default exports
+// } catch (error) {
+//   console.error("Error loading user configuration:", error);
+//   config = {
+//     outputFile: "gen.ts",
+//     codebase: "remix",
+//   }; // Fallback to default configuration
+// }j
+
+// return config;
+
+//   console.log("testing");
+//   const explorer = cosmiconfig("assetize");
+//   console.log(explorer.load(process.cwd()));
+// }
+
+// async function main() {
+//   const userConfig = await loadUserConfig();
+//   console.log(userConfig);
+// }
+
+// main().catch(console.error);
 
 // let userConfig = import("../../assetize.config");
 
@@ -44,3 +56,18 @@ main().catch(console.error);
 // }
 
 // main().catch(console.error);
+
+export async function loadConfig(cwd = process.cwd(), configPath: string) {
+  const explorer = cosmiconfig("assetize");
+
+  const explicitPath = configPath ? path.resolve(cwd, configPath) : undefined;
+  const explore = explicitPath ? explorer.load : explorer.search;
+  const searchPath = explicitPath ? explicitPath : cwd;
+  const local = await explore(searchPath);
+
+  if (local) {
+    return local;
+  }
+
+  return {};
+}
