@@ -37,6 +37,3 @@ export class AssetsSvgsGen {
     return [this.Genetic, this.button];
   }
 }
-
-const geneticIcon = AssetsSvgsGen.button;
-console.log(geneticIcon);

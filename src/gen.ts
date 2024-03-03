@@ -1,7 +1,6 @@
 // This is the generated code via script please don't change it!
 
 class Assets {
-
   private static _cache: Record<string, string> = {};
 
   static get(name: string) {

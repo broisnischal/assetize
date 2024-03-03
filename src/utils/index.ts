@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import prettier from "prettier";
 import { AssetsSvgsGen } from "./icons";
+import _ from "lodash";
 
 export class Generator {
   private readonly mainAssetPath: string;
@@ -31,7 +32,7 @@ export class Generator {
     const assetLines = svgFiles.map((file) => {
       const fileName = path.basename(file, ".svg");
 
-      return `  static ${fileName} = Assets.get("${fileName}");`;
+      return `  static ${_.snakeCase(fileName)} = Assets.get("${fileName}");`;
     });
 
     return `// This is the generated code via script please don't change it!

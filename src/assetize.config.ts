@@ -1,8 +1,9 @@
 // Common properties for all codebases
 interface CommonAssetizeConfigOptions {
   // Output path for generated asset files
-  outputGeneratedPath?: string;
-  outputFileName?: string;
+  output?: string;
+  outputFile?: string;
+  lineLength?: number;
   case?: "camel" | "kebab" | "pascal" | "snake";
   // Path to the main asset directory
   mainAssetPath?: string;
@@ -23,7 +24,6 @@ interface CommonAssetizeConfigOptions {
 export interface RemixAssetizeConfigOptions
   extends CommonAssetizeConfigOptions {
   codebase: "remix";
-  test: "tes";
 }
 
 export interface ReactAssetizeConfigOptions
