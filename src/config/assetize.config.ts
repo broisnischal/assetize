@@ -87,17 +87,6 @@ type AssetizeConfigOptions =
 //     codebase: "react";
 //   } & Exclude<ReactAssetizeConfigOptions, "codebase">);
 
-/**
- * Define Assetize Config
- *
- * @export
- * @param {AssetizeConfigOptions} options
- * @returns {AssetizeConfigOptions}
- */
-export function defineAssetizeConfig(options: AssetizeConfigOptions) {
-  return options;
-}
-
 // const allowedFileTypes = [
 //   "image/jpeg",
 //   "image/png",
@@ -142,5 +131,16 @@ const allowedFileTypes = {
 
 export type AllowedFileTypes =
   (typeof allowedFileTypes)[keyof typeof allowedFileTypes];
+
+/**
+ * Define Assetize Config
+ *
+ * @export
+ * @param {AssetizeConfigOptions} options
+ * @returns {AssetizeConfigOptions}
+ */
+export function defineAssetizeConfig(options: AssetizeConfigOptions) {
+  return options;
+}
 
 export type AssetizeConfig = ReturnType<typeof defineAssetizeConfig>;
