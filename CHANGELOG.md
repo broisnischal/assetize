@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.9
+
+### Patch Changes
+
+- 99ef318: mini changes
+
 ## 0.0.8
 
 ### Patch Changes
