@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.8
+
+### Patch Changes
+
+- 086de41: minor pactch
+
 ## 0.0.7
 
 ### Patch Changes
