@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.4
+
+### Patch Changes
+
+- 44d9c4c: Added custom generator, removed the unused files
+
 ## 0.0.3
 
 ### Patch Changes
