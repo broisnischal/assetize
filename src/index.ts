@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-import { Generator } from "./utils";
+// import { Generator } from "./utils";
 
-async function main() {
-  console.clear();
+// async function main() {
+//   console.clear();
 
-  const generator = new Generator("./assets", ".");
+//   const generator = new Generator("./assets", ".");
 
-  generator.generateAssetsFile("./assets");
-}
+//   generator.generateAssetsFile("./assets");
+// }
 
-main().catch(console.error);
+// main().catch(console.error);

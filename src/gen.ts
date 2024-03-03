@@ -1,25 +1,81 @@
-// This is the generated code via script please don't change it!
+/// GENERATED CODE - DO NOT MODIFY BY HAND
+/// *****************************************************
+///  Assetize Generator - DO NOT CHANGE
+/// *****************************************************
 
-class Assets {
-  private static _cache: Record<string, string> = {};
+class AssetItem {
+  private _assetName: string;
+  private _keyName: string;
 
-  static get(name: string) {
-    if (this._cache[name]) {
-      return this._cache[name];
-    }
-
-    return (this._cache[name] = `./assets/${name}.svg`);
+  constructor(assetName: string) {
+    this._assetName = assetName;
+    this._keyName = assetName.split("/").pop()?.split(".")[0]!;
   }
 
-  static set(name: string, value: string) {
-    this._cache[name] = value;
+  get keyName() {
+    return this._keyName;
   }
 
-  static Genetic = Assets.get("Genetic");
-  static button = Assets.get("button");
-  static hamburger = Assets.get("hamburger");
-  static rocket = Assets.get("rocket");
-  static shoppingCart = Assets.get("shoppingCart");
+  get path() {
+    return this._assetName;
+  }
 }
 
-export default Assets;
+class AssetsSvgsGen {
+  constructor() {}
+
+  private static instance: AssetsSvgsGen;
+
+  static readonly Genetic: AssetItem = new AssetItem(
+    "./assets/icons/Genetic.svg"
+  );
+  static readonly button: AssetItem = new AssetItem(
+    "./assets/icons/button.svg"
+  );
+
+  static get icons() {
+    return [this.Genetic, this.button];
+  }
+}
+
+class AssetsImagesGen {
+  constructor() {}
+
+  private static instance: AssetsImagesGen;
+
+  static readonly Genetic: AssetItem = new AssetItem(
+    "./assets/images/Genetic.jpg"
+  );
+  static readonly ButtonImage: AssetItem = new AssetItem(
+    "./assets/images/button.png"
+  );
+
+  static get images() {
+    return [this.Genetic, this.ButtonImage];
+  }
+}
+
+class AssetsFontsGen {
+  constructor() {}
+
+  private static instance: AssetsFontsGen;
+
+  static readonly Genetic: AssetItem = new AssetItem(
+    "./assets/fonts/Genetic.ttf"
+  );
+
+  static get fonts() {
+    return [this.Genetic];
+  }
+}
+
+/// Assets
+class MyAssets {
+  private constructor() {}
+
+  static readonly icons = AssetsSvgsGen;
+  static readonly images = AssetsImagesGen;
+  static readonly fonts = AssetsFontsGen;
+}
+
+export default MyAssets;
