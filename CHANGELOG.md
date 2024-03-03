@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.6
+
+### Patch Changes
+
+- c9a33cd: Added minor changes
+
 ## 0.0.5
 
 ### Patch Changes
