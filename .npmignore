@@ -25,3 +25,5 @@ seed.ts
 TODO.md
 CODE_OF_CONDUCT.md
 .husky
+
+tsup.config.ts
