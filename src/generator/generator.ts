@@ -31,6 +31,6 @@ import type { AssetizeConfig } from "../config/assetize.config";
 // }
 
 // const userConfig = loadUserConfig();
-// let userConfig = await import("../../");
+let userConfig = await import("../../");
 
-// console.log(userConfig);
+console.log(userConfig);

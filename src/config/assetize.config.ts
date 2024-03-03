@@ -35,7 +35,7 @@ export interface ReactAssetizeConfigOptions
 
 export interface NextAssetizeConfigOptions extends CommonAssetizeConfigOptions {
   codebase: "next";
-  publicDirectory: string;
+  publicDirectory?: string;
   mainNextAssetPath?: string;
 }
 
@@ -62,7 +62,7 @@ export interface AstroAssetizeConfigOptions
 export interface SolidAssetizeConfigOptions
   extends CommonAssetizeConfigOptions {
   codebase: "solid";
-  publicDirectory: string;
+  publicDirectory?: string;
   mainSolidAssetPath?: string;
 }
 
