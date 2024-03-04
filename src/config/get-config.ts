@@ -9,7 +9,13 @@ import { assetsDirectoryLike } from "./help-log";
 
 const configSchema = zod.object({
   output: zod.string().optional().default("./src"),
-  outputFile: zod.string().optional().default("assetize.gen.ts"),
+  outputFile: zod
+    .string()
+    .optional()
+    .default("assetize.gen.ts")
+    .refine((x) => x.endsWith(".ts") || x.endsWith(".js"), {
+      message: "outputFile must end with .ts or .js",
+    }),
   lineLength: zod.number().optional().default(80),
   className: zod
     .string()
@@ -23,8 +29,7 @@ const configSchema = zod.object({
   mainAssetPath: zod.string().optional().default("assets"),
   codebase: zod
     .enum(["remix", "react", "next", "solid", "svelte", "vue", "astro"])
-    .optional()
-    .default("next"),
+    .optional(),
   minifyAssets: zod.boolean().optional().default(true),
 });
 
