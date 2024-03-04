@@ -1,5 +1,12 @@
 # assetize
 
+## 0.0.10
+
+### Patch Changes
+
+- 9e7bef7: changes
+- 86091ff: Generated Code
+
 ## 0.0.9
 
 ### Patch Changes
