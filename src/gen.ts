@@ -26,11 +26,12 @@ class AssetsSvgsGen {
 
   private static instance: AssetsSvgsGen;
 
+  /// FILEP path : assets/icons/Genetic.svg
   static readonly Genetic: AssetItem = new AssetItem(
-    "./assets/icons/Genetic.svg"
+    "./assets/icons/Genetic.svg",
   );
   static readonly button: AssetItem = new AssetItem(
-    "./assets/icons/button.svg"
+    "./assets/icons/button.svg",
   );
 
   static get icons() {
@@ -44,10 +45,10 @@ class AssetsImagesGen {
   private static instance: AssetsImagesGen;
 
   static readonly Genetic: AssetItem = new AssetItem(
-    "./assets/images/Genetic.jpg"
+    "./assets/images/Genetic.jpg",
   );
   static readonly ButtonImage: AssetItem = new AssetItem(
-    "./assets/images/button.png"
+    "./assets/images/button.png",
   );
 
   static get images() {
@@ -61,7 +62,7 @@ class AssetsFontsGen {
   private static instance: AssetsFontsGen;
 
   static readonly Genetic: AssetItem = new AssetItem(
-    "./assets/fonts/Genetic.ttf"
+    "./assets/fonts/Genetic.ttf",
   );
 
   static get fonts() {
