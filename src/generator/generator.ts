@@ -17,8 +17,10 @@ export async function getFileContents() {
   }
 
   try {
+    console.log(path.join(config.output, file));
+
     const fileContents = fs
-      .readFileSync(path.join(assetsDirectory + "/", file))
+      .readFileSync(path.join(config.output, file))
       .toString();
 
     return fileContents;

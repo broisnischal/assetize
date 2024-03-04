@@ -57,7 +57,7 @@ import { assetsDirectoryLike } from "./help-log";
 // main().catch(console.error);
 
 const configSchema = zod.object({
-  output: zod.string().optional(),
+  output: zod.string().optional().default("./src"),
   outputFile: zod.string().optional().default("assetize.gen.ts"),
   lineLength: zod.number().optional().default(80),
   case: zod
