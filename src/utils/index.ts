@@ -64,6 +64,9 @@ export async function getCodebase(): Promise<Config["codebase"] | undefined> {
         return "vue";
       } else if (buildScript.includes("astro")) {
         return "astro";
+      } else {
+        console.log("No matched codebase found");
+        return undefined;
       }
     }
   } catch (error) {
