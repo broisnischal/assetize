@@ -15,7 +15,7 @@
     "test": "vitest run",
     "build": "tsup src/** --format cjs,esm  --dts",
     "lint": "tsc",
-    "test:setup": "yarn unlink --global assetize && yarn link --global assetize",
+    "test:setup": "yarn unlink --global && yarn link --global",
     "setup": "chmod +x ./dist/main.js",
     "release": "pnpm run lint && pnpm run test && pnpm run build && changeset publish"
   },
@@ -27,10 +27,13 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",
+    "chalk": "^5.3.0",
     "cosmiconfig": "^9.0.0",
     "lodash": "^4.17.21",
+    "ora": "^8.0.1",
     "picocolors": "^1.0.0",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",

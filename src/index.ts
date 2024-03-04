@@ -2,16 +2,24 @@
 
 // import { Generator } from "./utils";
 
-import { loadConfig } from "./generator/generator";
+import { getFileContents } from "./generator/generator";
+
+// import { loadConfig } from "./generator/generator";
 
 async function main() {
   console.clear();
 
-  const userConfig = loadConfig(undefined, "./assetize.config.ts");
-  console.log(userConfig);
+  // try {
+  //   const userConfig = await loadConfig();
+  //   console.log(userConfig);
+  // } catch (error) {
+  //   console.log("no file matched");
+  // }
   // const generator = new Generator("./assets", ".");
 
   // generator.generateAssetsFile("./assets");
+
+  console.log(await getFileContents());
 }
 
 main().catch(console.error);
