@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import prettier from "prettier";
 import { getConfig } from "../config/get-config";
+import { getCodebase } from "../utils";
 
 export async function getFileContents() {
   const config = await getConfig();
@@ -146,6 +147,8 @@ async function main() {
   });
 
   fs.writeFileSync(outputPath, formattedCode);
+
+  console.log(await getCodebase());
 }
 
 main();
