@@ -60,11 +60,12 @@ const configSchema = zod.object({
   output: zod.string().optional().default("./src"),
   outputFile: zod.string().optional().default("assetize.gen.ts"),
   lineLength: zod.number().optional().default(80),
+  className: zod.string().optional().default("MyAssets"),
   case: zod
     .enum(["camel", "kebab", "pascal", "snake"])
     .optional()
     .default("camel"),
-  mainAssetPath: zod.string().optional(),
+  mainAssetPath: zod.string().optional().default("assets"),
   codebase: zod
     .enum(["remix", "react", "next", "solid", "svelte", "vue", "astro"])
     .optional()
