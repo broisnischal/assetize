@@ -1,12 +1,11 @@
-// import { defineConfig } from "tsup";
+import { defineConfig } from "tsup";
 
-// export default defineConfig({
-//   format: ["cjs", "esm"],
-//   entry: ["./src/index.ts"],
-//   dts: true,
-//   shims: true,
-//   skipNodeModulesBundle: true,
-//   clean: true,
-//   minify: true,
-//   // splitting: false,
-// });
+export default defineConfig({
+  clean: true,
+  dts: true,
+  entry: ["src/index.ts"],
+  format: ["esm"],
+  sourcemap: true,
+  target: "esnext",
+  outDir: "dist",
+});
