@@ -7,6 +7,10 @@ import { cosmiconfig } from "cosmiconfig";
 import { logger } from "../logger";
 import { assetsDirectoryLike } from "./help-log";
 
+const integrationSchema = zod.object({
+  path: zod.string(),
+});
+
 const configSchema = zod.object({
   output: zod.string().optional().default("./src"),
   outputFile: zod
@@ -26,7 +30,24 @@ const configSchema = zod.object({
     .enum(["camel", "kebab", "pascal", "snake"])
     .optional()
     .default("camel"),
-  mainAssetPath: zod.string().optional().default("assets"),
+  assets: zod.object({
+    path: zod.string().default("assets"),
+    integrations: zod.object({
+      source: zod.string(),
+      icons: integrationSchema.default({
+        path: "icons",
+      }),
+      images: integrationSchema.default({
+        path: "images",
+      }),
+      fonts: integrationSchema.default({
+        path: "fonts",
+      }),
+      videos: integrationSchema.default({
+        path: "videos",
+      }),
+    }),
+  }),
   codebase: zod
     .enum(["remix", "react", "next", "solid", "svelte", "vue", "astro"])
     .optional(),
