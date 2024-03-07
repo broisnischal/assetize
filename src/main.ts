@@ -46,6 +46,7 @@ async function main() {
             { value: "solid", label: "Solid" },
             { value: "astro", label: "Astro" },
             { value: "vue", label: "Vue" },
+            { value: "custom", label: "Custom" },
           ],
         }),
       lineLength: () =>
