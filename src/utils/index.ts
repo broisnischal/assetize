@@ -75,3 +75,24 @@ export async function getCodebase(): Promise<Config["codebase"] | undefined> {
 
   return undefined;
 }
+
+export function addScriptToPackageJSON(
+  scriptName: string,
+  scriptCommand: string,
+): void {
+  const packageJSONPath = path.resolve(process.cwd(), "package.json");
+
+  try {
+    const packageJSON = getPackageJSON();
+
+    if (!packageJSON) throw new Error("No package.json found");
+
+    packageJSON.scripts = packageJSON.scripts || {};
+    packageJSON.scripts[scriptName] = scriptCommand;
+
+    fs.writeFileSync(packageJSONPath, JSON.stringify(packageJSON, null, 2));
+    console.log(`Script '${scriptName}' added to package.json`);
+  } catch (error) {
+    console.error("Error adding script to package.json:", error);
+  }
+}

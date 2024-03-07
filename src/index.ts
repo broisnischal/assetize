@@ -3,6 +3,7 @@
 // import { Generator } from "./utils";
 
 import { getFileContents } from "./generator/generator";
+import { addScriptToPackageJSON, getPackageJSON } from "./utils";
 
 // import { loadConfig } from "./generator/generator";
 
@@ -18,6 +19,9 @@ async function main() {
   // const generator = new Generator("./assets", ".");
 
   // generator.generateAssetsFile("./assets");
+
+  const packagae = getPackageJSON();
+  console.log(packagae);
 
   console.log(await getFileContents());
 }
