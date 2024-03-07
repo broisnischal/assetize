@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.11
+
+### Patch Changes
+
+- 658e335: Mini version, added config generator, script builder, file writer!
+
 ## 0.0.10
 
 ### Patch Changes
