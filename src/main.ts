@@ -3,63 +3,86 @@
 import * as p from "@clack/prompts";
 import { setTimeout } from "node:timers/promises";
 import color from "picocolors";
+import { Config, getConfig } from "./config/get-config";
+import { getCodebase } from "./utils";
+import fs from "node:fs";
 
 async function main() {
   console.clear();
 
   await setTimeout(1000);
 
-  p.intro(`${color.bgCyan(color.black(" create-app "))}`);
+  const config = await getConfig();
+  const detectedCodeBase = await getCodebase();
+
+  let configWritten: Config = {
+    ...config,
+    codebase: detectedCodeBase,
+  };
+
+  p.intro(
+    `${color.bgCyan(color.black(" Assetize: create your asset class "))}`,
+  );
 
   const project = await p.group(
     {
       path: () =>
         p.text({
           message: "Where is your root asset folder?",
-          placeholder: "./sparkling-solid",
+          placeholder: "./assets",
+          defaultValue: config.assets?.path!,
+          initialValue: config.assets?.path!,
           validate: (value) => {
             if (!value) return "Please enter a path.";
             if (value[0] !== ".") return "Please enter a relative path.";
           },
         }),
-      password: () =>
-        p.password({
-          message: "Provide a password",
-          validate: (value) => {
-            if (!value) return "Please enter a password.";
-            if (value.length < 5)
-              return "Password should have at least 5 characters.";
-          },
-        }),
-      type: ({ results }) =>
+
+      codebase: () =>
         p.select({
-          message: `Pick a project type within "${results.path}"`,
-          initialValue: "ts",
+          message: "Select a codebase",
+          initialValue: detectedCodeBase ?? "remix",
           maxItems: 5,
           options: [
-            { value: "ts", label: "TypeScript" },
-            { value: "js", label: "JavaScript" },
-            { value: "rust", label: "Rust" },
-            { value: "go", label: "Go" },
-            { value: "python", label: "Python" },
-            { value: "coffee", label: "CoffeeScript", hint: "oh no" },
+            { value: "remix", label: "Remix" },
+            { value: "next", label: "Next" },
+            { value: "react", label: "React" },
+            { value: "svelte", label: "Svelte" },
+            { value: "solid", label: "Solid" },
+            { value: "astro", label: "Astro" },
+            { value: "vue", label: "Vue" },
           ],
         }),
-      tools: () =>
-        p.multiselect({
-          message: "Select additional tools.",
-          initialValues: ["prettier", "eslint"],
-          options: [
-            { value: "prettier", label: "Prettier", hint: "recommended" },
-            { value: "eslint", label: "ESLint", hint: "recommended" },
-            { value: "stylelint", label: "Stylelint" },
-            { value: "gh-action", label: "GitHub Action" },
-          ],
-        }),
-      install: () =>
+
+      // type: ({ results }) =>
+      //   p.select({
+      //     message: `Pick a project type within "${results.path}"`,
+      //     initialValue: "ts",
+      //     maxItems: 5,
+      //     options: [
+      //       { value: "ts", label: "TypeScript" },
+      //       { value: "js", label: "JavaScript" },
+      //       { value: "rust", label: "Rust" },
+      //       { value: "go", label: "Go" },
+      //       { value: "python", label: "Python" },
+      //       { value: "coffee", label: "CoffeeScript", hint: "oh no" },
+      //     ],
+      //   }),
+      // tools: () =>
+      //   p.multiselect({
+      //     message: "Select additional tools.",
+      //     initialValues: ["prettier", "eslint"],
+      //     options: [
+      //       { value: "prettier", label: "Prettier", hint: "recommended" },
+      //       { value: "eslint", label: "ESLint", hint: "recommended" },
+      //       { value: "stylelint", label: "Stylelint" },
+      //       { value: "gh-action", label: "GitHub Action" },
+      //     ],
+      //   }),
+      generate: () =>
         p.confirm({
-          message: "Install dependencies?",
-          initialValue: false,
+          message: "Generate a config file? (y/n)",
+          initialValue: true,
         }),
     },
     {
@@ -67,25 +90,36 @@ async function main() {
         p.cancel("Operation cancelled.");
         process.exit(0);
       },
-    }
+    },
   );
 
-  if (project.install) {
+  configWritten = {
+    ...configWritten,
+    ...project,
+  };
+
+  if (project.generate) {
     const s = p.spinner();
-    s.start("Installing via pnpm");
-    await setTimeout(2500);
+    s.start("Generating and writing config file");
+    // fs.writeFileSync(
+    //   "./assetize.config.ts",
+    //   `
+    //   `,
+    // );
     s.stop("Installed via pnpm");
+  } else {
+    console.log("\nCancelled generation!\n");
   }
 
-  let nextSteps = `cd ${project.path}        \n${
-    project.install ? "" : "pnpm install\n"
-  }pnpm dev`;
+  // let nextSteps = `cd ${project.path}        \n${
+  //   project.generate ? "" : "pnpm install\n"
+  // }pnpm dev`;
 
-  p.note(nextSteps, "Next steps.");
+  // p.note(nextSteps, "Next steps.");
 
-  p.outro(
-    `Problems? ${color.underline(color.cyan("https://example.com/issues"))}`
-  );
+  // p.outro(
+  //   `Problems? ${color.underline(color.cyan("https://example.com/issues"))}`,
+  // );
 }
 
 main().catch(console.error);

@@ -43,7 +43,7 @@ export async function getCodebase(): Promise<Config["codebase"] | undefined> {
     const packageJSON = getPackageJSON();
 
     if (!packageJSON) {
-      console.log("No package.json found");
+      // console.log("No package.json found");
       return undefined;
     }
 
@@ -65,7 +65,7 @@ export async function getCodebase(): Promise<Config["codebase"] | undefined> {
       } else if (buildScript.includes("astro")) {
         return "astro";
       } else {
-        console.log("No matched codebase found");
+        // console.log("No matched codebase found");
         return undefined;
       }
     }

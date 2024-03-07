@@ -10,18 +10,18 @@ export async function getFileContents() {
 
   const { codebase } = config;
 
-  const assetsDirectory = config.mainAssetPath;
-  const file = config.outputFile;
+  const assetsDirectory = config.assets?.path;
+  const file = config.outputFile!;
 
-  if (!fs.existsSync(assetsDirectory)) {
+  if (!fs.existsSync(assetsDirectory!)) {
     throw new Error(`Directory ${assetsDirectory} does not exist`);
   }
 
   try {
-    console.log(path.join(config.output, file));
+    console.log(path.join(config.output!, file));
 
     const fileContents = fs
-      .readFileSync(path.join(config.output, file))
+      .readFileSync(path.join(config.output!, file))
       .toString();
 
     return fileContents;
@@ -132,7 +132,7 @@ export function createMainClassAndExport() {
 async function main() {
   const config = await getConfig();
 
-  const outputPath = path.join(config.output, config.outputFile);
+  const outputPath = path.join(config.output!, config.outputFile!);
 
   const generatedCode = `
   ${createAssetItem()}
