@@ -60,7 +60,16 @@ const configSchema = zod.object({
     })
     .optional(),
   codebase: zod
-    .enum(["remix", "react", "next", "solid", "svelte", "vue", "astro"])
+    .enum([
+      "remix",
+      "react",
+      "next",
+      "solid",
+      "svelte",
+      "vue",
+      "astro",
+      "custom",
+    ])
     .optional(),
   minifyAssets: zod.boolean().default(true).optional(),
 });

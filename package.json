@@ -17,8 +17,7 @@
     "lint": "tsc",
     "test:setup": "yarn unlink --global && yarn link --global",
     "setup": "chmod +x ./dist/main.js",
-    "release": "pnpm run lint && pnpm run test && pnpm run build && changeset publish",
-    "assetize:build": "npx assetize build"
+    "release": "pnpm run lint && pnpm run test && pnpm run build && changeset publish"
   },
   "keywords": [],
   "author": "",

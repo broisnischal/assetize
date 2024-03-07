@@ -13,13 +13,8 @@ async function main() {
 
   await setTimeout(1000);
 
-  const config = await getConfig();
+  // const config = await getConfig();
   const detectedCodeBase = await getCodebase();
-
-  let configWritten: Config = {
-    ...config,
-    codebase: detectedCodeBase,
-  };
 
   p.intro(
     `${color.bgCyan(color.black(" Assetize: create your asset class "))}`,
@@ -31,8 +26,7 @@ async function main() {
         p.text({
           message: "Where is your root asset folder?",
           placeholder: "./assets",
-          defaultValue: config.assets?.path!,
-          initialValue: config.assets?.path!,
+          defaultValue: "./assets",
           validate: (value) => {
             if (!value) return "Please enter a path.";
             if (value[0] !== ".") return "Please enter a relative path.";
@@ -57,8 +51,9 @@ async function main() {
       lineLength: () =>
         p.text({
           message: "Line length",
-          defaultValue: config.lineLength?.toString()! ?? "80",
+          defaultValue: "80",
           placeholder: "80",
+          initialValue: "80",
           validate: (value) => (value ? undefined : "Please enter a number"),
         }),
       // type: ({ results }) =>
@@ -89,7 +84,7 @@ async function main() {
       case: () =>
         p.select({
           message: "Convert case",
-          initialValue: config.case,
+          initialValue: "camel" as Config["case"],
           maxItems: 1,
           options: [
             {
@@ -113,8 +108,7 @@ async function main() {
       className: () =>
         p.text({
           message: "Class name",
-          defaultValue: config.className ?? "MyAssets",
-          initialValue: config.className ?? "MyAssets",
+          defaultValue: "MyAssets",
           placeholder: "MyAssets",
         }),
       generate: () =>
@@ -131,15 +125,14 @@ async function main() {
     },
   );
 
-  configWritten = {
-    ...configWritten,
+  const configCode: Config = {
     lineLength: Number(project.lineLength),
-    codebase: project.codebase,
+    codebase: project.codebase ?? detectedCodeBase,
     assets: {
       path: project.path,
     },
     case: project.case,
-    // className: project.className,
+    className: project.className,
   };
 
   if (project.generate) {
@@ -147,15 +140,13 @@ async function main() {
     s.start("Generating and writing config file");
 
     const code = `import { defineAssetizeConfig } from "assetize";
+    export default defineAssetizeConfig(${JSON.stringify(configCode, null, 2)} );`;
 
-export default defineAssetizeConfig(${JSON.stringify(configWritten, null, 2)} );`;
     fs.writeFileSync("./assetize.config.ts", code);
 
     const formattedCode = await prettier.format(code, {
       parser: "typescript",
     });
-
-    console.log(config);
 
     fs.writeFileSync("./assetize.config.ts", formattedCode);
 
