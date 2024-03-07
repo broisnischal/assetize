@@ -24,7 +24,8 @@ const configSchema = zod.object({
   className: zod
     .string()
     .default("MyAssets")
-    .transform((x) => _.upperFirst(x).replace(/-/g, "")),
+    .transform((x) => _.upperFirst(x).replace(/-/g, ""))
+    .optional(),
   case: zod
     .enum(["camel", "kebab", "pascal", "snake"])
     .default("camel")

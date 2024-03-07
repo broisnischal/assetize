@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
 import * as p from "@clack/prompts";
+import fs from "node:fs";
 import { setTimeout } from "node:timers/promises";
 import color from "picocolors";
+import prettier from "prettier";
 import { Config, getConfig } from "./config/get-config";
 import { getCodebase } from "./utils";
-import fs from "node:fs";
-import prettier from "prettier";
-import path from "node:path";
 
 async function main() {
   console.clear();
@@ -111,6 +110,13 @@ async function main() {
             },
           ],
         }),
+      // className: () =>
+      //   p.text({
+      //     message: "Class name",
+      //     defaultValue: config.className ?? "MyAssets",
+      //     initialValue: config.className ?? "MyAssets",
+      //     placeholder: "MyAssets",
+      //   }),
       generate: () =>
         p.confirm({
           message: "Generate a config file? (y/n)",
@@ -128,6 +134,12 @@ async function main() {
   configWritten = {
     ...configWritten,
     lineLength: Number(project.lineLength),
+    codebase: project.codebase,
+    assets: {
+      path: project.path,
+    },
+    case: project.case,
+    // className: project.className,
   };
 
   if (project.generate) {
