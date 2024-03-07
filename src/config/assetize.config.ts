@@ -1,3 +1,5 @@
+import { Config } from "./get-config";
+
 // Common properties for all codebases
 interface CommonAssetizeConfigOptions {
   // Output path for generated asset files
@@ -139,7 +141,7 @@ export type AllowedFileTypes =
  * @param {AssetizeConfigOptions} options
  * @returns {AssetizeConfigOptions}
  */
-export function defineAssetizeConfig(options: AssetizeConfigOptions) {
+export function defineAssetizeConfig(options: Config) {
   return options;
 }
 

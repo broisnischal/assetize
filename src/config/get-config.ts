@@ -12,46 +12,57 @@ const integrationSchema = zod.object({
 });
 
 const configSchema = zod.object({
-  output: zod.string().optional().default("./src"),
+  output: zod.string().default("./src").optional(),
   outputFile: zod
     .string()
-    .optional()
     .default("assetize.gen.ts")
     .refine((x) => x.endsWith(".ts") || x.endsWith(".js"), {
       message: "outputFile must end with .ts or .js",
-    }),
-  lineLength: zod.number().optional().default(80),
+    })
+    .optional(),
+  lineLength: zod.number().default(80).optional(),
   className: zod
     .string()
-    .optional()
     .default("MyAssets")
-    .transform((x) => _.upperFirst(x).replace(/-/g, "")),
+    .transform((x) => _.upperFirst(x).replace(/-/g, ""))
+    .optional(),
   case: zod
     .enum(["camel", "kebab", "pascal", "snake"])
-    .optional()
-    .default("camel"),
-  assets: zod.object({
-    path: zod.string().default("assets"),
-    integrations: zod.object({
-      source: zod.string(),
-      icons: integrationSchema.default({
-        path: "icons",
-      }),
-      images: integrationSchema.default({
-        path: "images",
-      }),
-      fonts: integrationSchema.default({
-        path: "fonts",
-      }),
-      videos: integrationSchema.default({
-        path: "videos",
-      }),
-    }),
-  }),
+    .default("camel")
+    .optional(),
+  assets: zod
+    .object({
+      path: zod.string().default("assets"),
+      integrations: zod
+        .object({
+          icons: integrationSchema
+            .default({
+              path: "icons",
+            })
+            .optional(),
+          images: integrationSchema
+            .default({
+              path: "images",
+            })
+            .optional(),
+          fonts: integrationSchema
+            .default({
+              path: "fonts",
+            })
+            .optional(),
+          videos: integrationSchema
+            .default({
+              path: "videos",
+            })
+            .optional(),
+        })
+        .optional(),
+    })
+    .optional(),
   codebase: zod
     .enum(["remix", "react", "next", "solid", "svelte", "vue", "astro"])
     .optional(),
-  minifyAssets: zod.boolean().optional().default(true),
+  minifyAssets: zod.boolean().default(true).optional(),
 });
 
 export type Config = zod.infer<typeof configSchema>;
