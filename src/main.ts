@@ -110,13 +110,13 @@ async function main() {
             },
           ],
         }),
-      // className: () =>
-      //   p.text({
-      //     message: "Class name",
-      //     defaultValue: config.className ?? "MyAssets",
-      //     initialValue: config.className ?? "MyAssets",
-      //     placeholder: "MyAssets",
-      //   }),
+      className: () =>
+        p.text({
+          message: "Class name",
+          defaultValue: config.className ?? "MyAssets",
+          initialValue: config.className ?? "MyAssets",
+          placeholder: "MyAssets",
+        }),
       generate: () =>
         p.confirm({
           message: "Generate a config file? (y/n)",

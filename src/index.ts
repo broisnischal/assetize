@@ -23,6 +23,8 @@ async function main() {
   const packagae = getPackageJSON();
   console.log(packagae);
 
+  addScriptToPackageJSON("assetize:build", "npx assetize build");
+
   console.log(await getFileContents());
 }
 

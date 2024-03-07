@@ -108,7 +108,7 @@ export async function getConfig() {
   const configResult = await getExplorer().search();
 
   if (!configResult) {
-    assetsDirectoryLike();
+    // assetsDirectoryLike();
     logger.error("Couldn't find assetize.config.ts or assetize.config.js");
     process.exit(1);
   }
