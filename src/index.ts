@@ -4,6 +4,7 @@ import { Command } from "commander";
 import { getFileContents } from "./generator/generator";
 import { addScriptToPackageJSON, getPackageJSON } from "./utils";
 import packageJSON from "../package.json" with { type: "json" };
+import { init } from "./commands/generate";
 
 process.on("SIGINT", () => process.exit(0));
 process.on("SIGTERM", () => process.exit(0));
@@ -35,6 +36,8 @@ const program = new Command()
   .name("assetize")
   .description("generates the assets class file for your project")
   .version(packageJSON.version, "-v, --version", "display the version number");
+
+program.addCommand(init);
 
 program.parse();
 

@@ -96,3 +96,21 @@ export function addScriptToPackageJSON(
     console.error("Error adding script to package.json:", error);
   }
 }
+
+/**
+ * Check if a directory contains files.
+ * @param directoryPath The path to the directory.
+ * @returns A boolean indicating whether the directory contains files.
+ */
+export function directoryContainsFiles(directoryPath: string): boolean {
+  try {
+    // Read the contents of the directory
+    const files = fs.readdirSync(directoryPath);
+
+    // Check if there are any files in the directory
+    return files.length > 0;
+  } catch (error) {
+    console.error("Error checking directory:", error);
+    return false;
+  }
+}

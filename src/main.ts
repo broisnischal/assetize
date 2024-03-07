@@ -6,9 +6,9 @@ import { setTimeout } from "node:timers/promises";
 import color from "picocolors";
 import prettier from "prettier";
 import { Config, getConfig } from "./config/get-config";
-import { getCodebase } from "./utils";
+import { directoryContainsFiles, getCodebase } from "./utils";
 
-async function main() {
+export async function generateConfigFile() {
   console.clear();
 
   await setTimeout(1000);
@@ -25,11 +25,15 @@ async function main() {
       path: () =>
         p.text({
           message: "Where is your root asset folder?",
-          placeholder: "./assets",
+          placeholder: "./assets, ./public, ./src, etc.",
           defaultValue: "./assets",
           validate: (value) => {
             if (!value) return "Please enter a path.";
             if (value[0] !== ".") return "Please enter a relative path.";
+
+            if (directoryContainsFiles(value)) {
+              return "Directory is not empty!";
+            }
           },
         }),
 
@@ -167,4 +171,4 @@ async function main() {
   // );
 }
 
-main().catch(console.error);
+// generateConfigFile().catch(console.error);
