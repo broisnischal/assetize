@@ -98,17 +98,20 @@ export function addScriptToPackageJSON(
 }
 
 /**
- * Check if a directory contains files.
+ * Check if a directory contains only files (not directories).
  * @param directoryPath The path to the directory.
- * @returns A boolean indicating whether the directory contains files.
+ * @returns A boolean indicating whether the directory contains only files.
  */
 export function directoryContainsFiles(directoryPath: string): boolean {
   try {
     // Read the contents of the directory
-    const files = fs.readdirSync(directoryPath);
+    const contents = fs.readdirSync(directoryPath);
 
     // Check if there are any files in the directory
-    return files.length > 0;
+    return contents.some((item) => {
+      const itemPath = `${directoryPath}/${item}`;
+      return fs.statSync(itemPath).isFile();
+    });
   } catch (error) {
     console.error("Error checking directory:", error);
     return false;

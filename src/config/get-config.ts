@@ -116,6 +116,8 @@ export async function getConfigFilePath() {
 export async function getConfig() {
   const configResult = await getExplorer().search();
 
+  console.log(configResult?.config);
+
   if (!configResult) {
     // assetsDirectoryLike();
     logger.error("Couldn't find assetize.config.ts or assetize.config.js");

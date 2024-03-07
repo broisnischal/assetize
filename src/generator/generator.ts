@@ -4,6 +4,7 @@ import path from "node:path";
 import prettier from "prettier";
 import { getConfig } from "../config/get-config";
 import { getCodebase } from "../utils";
+import { logger } from "../logger";
 
 export async function getFileContents() {
   const config = await getConfig();
@@ -129,26 +130,29 @@ export function createMainClassAndExport() {
   `;
 }
 
-async function main() {
-  const config = await getConfig();
+export async function generateFile() {
+  try {
+    const config = await getConfig();
 
-  const outputPath = path.join(config.output!, config.outputFile!);
+    const outputPath = path.join(config.output!, config.outputFile!);
 
-  const generatedCode = `
-  ${createAssetItem()}
-  ${createClassSvgGen()}
-  ${createClassImageGen()}
-  ${createClassFontGen()}
-  ${createMainClassAndExport()}
-  `;
+    const generatedCode = `
+        ${createAssetItem()}
+        ${createClassSvgGen()}
+        ${createClassImageGen()}
+        ${createClassFontGen()}
+        ${createMainClassAndExport()}
+        `;
 
-  const formattedCode = await prettier.format(generatedCode, {
-    parser: "typescript",
-  });
+    const formattedCode = await prettier.format(generatedCode, {
+      parser: "typescript",
+    });
 
-  fs.writeFileSync(outputPath, formattedCode);
-
-  console.log(await getCodebase());
+    fs.writeFileSync(outputPath, formattedCode);
+  } catch (error) {
+    logger.error(error);
+    process.exit(0);
+  }
 }
 
-main();
+// generateFile();

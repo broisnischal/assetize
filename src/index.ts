@@ -5,6 +5,7 @@ import { getFileContents } from "./generator/generator";
 import { addScriptToPackageJSON, getPackageJSON } from "./utils";
 import packageJSON from "../package.json" with { type: "json" };
 import { init } from "./commands/generate";
+import { build } from "./commands/build";
 
 process.on("SIGINT", () => process.exit(0));
 process.on("SIGTERM", () => process.exit(0));
@@ -37,7 +38,7 @@ const program = new Command()
   .description("generates the assets class file for your project")
   .version(packageJSON.version, "-v, --version", "display the version number");
 
-program.addCommand(init);
+program.addCommand(init).addCommand(build);
 
 program.parse();
 
