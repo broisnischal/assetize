@@ -24,8 +24,7 @@ const configSchema = zod.object({
   className: zod
     .string()
     .default("MyAssets")
-    .transform((x) => _.upperFirst(x).replace(/-/g, ""))
-    .optional(),
+    .transform((x) => _.upperFirst(x).replace(/-/g, "")),
   case: zod
     .enum(["camel", "kebab", "pascal", "snake"])
     .default("camel")
@@ -104,7 +103,7 @@ export async function getConfigFilePath() {
   return configResult.filepath;
 }
 
-export async function getConfig(): Promise<Config> {
+export async function getConfig() {
   const configResult = await getExplorer().search();
 
   if (!configResult) {
