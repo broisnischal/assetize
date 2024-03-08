@@ -414,10 +414,6 @@
     "xcode_version": "13.0",
     "nodedir": "/Users/nees/Library/Caches/node-gyp/21.6.2",
     "python": "/opt/homebrew/opt/python@3.12/bin/python3.12",
-    "standalone_static_library": 1,
-    "registry": "https://registry.npmjs.org/",
-    "frozen_lockfile": "",
-    "node_gyp": "/Users/nees/.nvm/versions/node/v21.6.2/lib/node_modules/pnpm/dist/node_modules/node-gyp/bin/node-gyp.js",
-    "user_agent": "pnpm/8.15.3 npm/? node/v21.6.2 darwin arm64"
+    "standalone_static_library": 1
   }
 }

@@ -53,8 +53,7 @@ INCS_Debug := \
 	-I/Users/nees/Library/Caches/node-gyp/21.6.2/deps/openssl/openssl/include \
 	-I/Users/nees/Library/Caches/node-gyp/21.6.2/deps/uv/include \
 	-I/Users/nees/Library/Caches/node-gyp/21.6.2/deps/zlib \
-	-I/Users/nees/Library/Caches/node-gyp/21.6.2/deps/v8/include \
-	-I$(srcdir)/node_modules/.pnpm/nan@2.19.0/node_modules/nan
+	-I/Users/nees/Library/Caches/node-gyp/21.6.2/deps/v8/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=addon' \
@@ -105,8 +104,7 @@ INCS_Release := \
 	-I/Users/nees/Library/Caches/node-gyp/21.6.2/deps/openssl/openssl/include \
 	-I/Users/nees/Library/Caches/node-gyp/21.6.2/deps/uv/include \
 	-I/Users/nees/Library/Caches/node-gyp/21.6.2/deps/zlib \
-	-I/Users/nees/Library/Caches/node-gyp/21.6.2/deps/v8/include \
-	-I$(srcdir)/node_modules/.pnpm/nan@2.19.0/node_modules/nan
+	-I/Users/nees/Library/Caches/node-gyp/21.6.2/deps/v8/include
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/addon.o
@@ -124,15 +122,15 @@ $(OBJS): GYP_OBJCXXFLAGS := $(DEFS_$(BUILDTYPE)) $(INCS_$(BUILDTYPE))  $(CFLAGS_
 
 # Suffix rules, putting all outputs into $(obj).
 
-$(obj).$(TOOLSET)/$(TARGET)/%.o: $(srcdir)/%.cc FORCE_DO_CMD
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(srcdir)/%.cpp FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
 
 # Try building from generated source, too.
 
-$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj).$(TOOLSET)/%.cc FORCE_DO_CMD
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj).$(TOOLSET)/%.cpp FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
 
-$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cc FORCE_DO_CMD
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cpp FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
 
 # End of this set of suffix rules
