@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.12
+
+### Patch Changes
+
+- 4756f7b: minor changes, fixes coming up feature in v1
+
 ## 0.0.11
 
 ### Patch Changes
