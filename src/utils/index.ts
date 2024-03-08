@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Config, getConfig } from "../config/get-config";
+import { Config, getConfig } from "../config";
 import fs from "node:fs";
 import path from "node:path";
 

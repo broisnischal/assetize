@@ -17,7 +17,7 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   clean: true,
-  dts: true,
+  dts: process.env.LOCAL === "true" ? true : false,
   entry: ["src/index.ts"],
   format: ["esm", "cjs"],
   sourcemap: true,

@@ -5,7 +5,7 @@ import fs from "node:fs";
 import { setTimeout } from "node:timers/promises";
 import color from "picocolors";
 import prettier from "prettier";
-import { Config } from "./config/get-config";
+import { Config } from "./config";
 import { directoryContainsFiles, getCodebase } from "./utils";
 
 export async function generateConfigFile() {

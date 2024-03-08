@@ -1,4 +1,4 @@
-import { defineAssetizeConfig } from "./src/config/assetize.config";
+import { defineAssetizeConfig } from "./src/config";
 
 export default defineAssetizeConfig({
   codebase: "remix",
