@@ -6,12 +6,17 @@ import { setTimeout } from "node:timers/promises";
 import color from "picocolors";
 import prettier from "prettier";
 import { Config } from "./config";
-import { directoryContainsFiles, getCodebase } from "./utils";
+import {
+  directoryContainsFiles,
+  getCodebase,
+  installDependencies,
+} from "./utils";
+import { execaCommandSync } from "execa";
 
 export async function generateConfigFile() {
   console.clear();
 
-  await setTimeout(1000);
+  // await setTimeout(1000);
 
   // const config = await getConfig();
   const detectedCodeBase = await getCodebase();
@@ -203,4 +208,54 @@ export async function generateConfigFile() {
   );
 }
 
-// generateConfigFile().catch(console.error);
+export async function askInstall() {
+  const install = await p.group(
+    {
+      confirm: () =>
+        p.confirm({
+          message: "Install dependencies? (y/n)",
+          active: "Yes",
+          inactive: "No",
+          initialValue: true,
+        }),
+    },
+    {
+      onCancel: () => {
+        p.cancel("Operation cancelled.");
+        process.exit(0);
+      },
+    },
+  );
+
+  // const spin = p.spinner();
+  // spin.start("Installing... 🚀");
+
+  if (install.confirm) {
+    await installDependencies();
+  } else {
+    p.outro("Dependencies not installed.");
+
+    p.outro(
+      `Problems? ${color.underline(color.cyan("https://github.com/broisnischal/assetize/issues"))}`,
+    );
+
+    process.exit(0);
+  }
+
+  // spin.stop("Done!");
+}
+
+export async function askGenerate() {
+  p.intro("Generate config file");
+
+  const generate = await p.confirm({
+    message: "Generate config file? (y/n)",
+    initialValue: true,
+  });
+
+  if (generate) {
+    generateConfigFile();
+  }
+
+  p.outro("Config file generated.");
+}

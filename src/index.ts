@@ -5,7 +5,9 @@ import packageJSON from "../package.json" with { type: "json" };
 import { build } from "./commands/build";
 import { generate } from "./commands/generate";
 import { init } from "./commands/init";
+import { execaCommandSync } from "execa";
 import { Config } from "./config";
+import { askInstall } from "./main";
 
 process.on("SIGINT", () => process.exit(0));
 process.on("SIGTERM", () => process.exit(0));

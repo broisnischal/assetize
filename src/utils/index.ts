@@ -2,6 +2,7 @@ import _ from "lodash";
 import { Config, getConfig } from "../config";
 import fs from "fs-extra";
 import path from "node:path";
+import { exec, spawn } from "node:child_process";
 
 export function normalizeString(str: string): string {
   const normalizedStr = str
@@ -191,4 +192,51 @@ export async function createAssetsDirectory(assetsDir = "./assets") {
   } catch (error: any) {
     console.error(error.message);
   }
+}
+
+const npmInstallCommand = "npm install assetize";
+const yarnInstallCommand = "yarn install assetize";
+const bunInstallCommand = "bun install assetize";
+
+exec(npmInstallCommand, (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error executing command: ${error.message}`);
+    return;
+  }
+  if (stderr) {
+    console.error(`Command stderr: ${stderr}`);
+    return;
+  }
+  console.log(`Dependencies installed successfully:\n${stdout}`);
+});
+
+export async function installDependencies() {
+  const command = "pnpm";
+  const args = ["install", "assetize"];
+
+  const childProcess = spawn(command, args, {});
+
+  childProcess.on("message", (message) => {
+    // console.log(message);
+  });
+
+  childProcess.on("spawn", () => {
+    console.log("Installing dependencies...");
+  });
+
+  childProcess.on("error", (error) => {
+    console.log(error.cause);
+    console.error(`Error executing command: ${error.message}`);
+    process.exit(1);
+  });
+
+  childProcess.on("close", (code) => {
+    if (code === 0) {
+      console.log("Dependencies installed successfully");
+      process.exit(0);
+    } else {
+      console.error(`Dependencies installation failed with code ${code}`);
+      process.exit(1);
+    }
+  });
 }

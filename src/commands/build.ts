@@ -10,7 +10,7 @@ export const build = new Command()
       logger.error(err);
     });
 
-    logger.info(`Success build file`);
+    logger.info(`Build sucessed!`);
 
     process.exit(1);
   });
