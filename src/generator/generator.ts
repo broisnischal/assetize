@@ -6,7 +6,7 @@ import { defaultConfigOptions, getConfig } from "../config";
 // import { getCodebase } from "../utils";
 import { logger } from "../utils/logger";
 import { Config } from "../config";
-import { convertCase, normalizeString } from "../utils";
+import { convertCase, generatePublicPath, normalizeString } from "../utils";
 
 export async function getFileContents() {
   const config = await getConfig();
@@ -86,7 +86,7 @@ export async function createClassIconsGen() {
         const joinedPath = path.join(mainRoute, file.name);
 
         return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
-        "${joinedPath}",
+        "${generatePublicPath(joinedPath, config.codebase)}",
       );`;
       })
       .join("\n")}
@@ -128,7 +128,7 @@ export async function createClassImageGen() {
         const joinedPath = path.join(mainRoute, file.name);
 
         return `static readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
-        "${joinedPath}",
+        "${generatePublicPath(joinedPath, config.codebase)}",
       );`;
       })
       .join("\n")}
@@ -172,7 +172,7 @@ export async function createClassFontGen() {
         const joinedPath = path.join(mainRoute, file.name);
 
         return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
-        "${joinedPath}",
+        "${generatePublicPath(joinedPath, config.codebase)}",
       );`;
       })
       .join("\n")}

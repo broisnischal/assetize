@@ -366,9 +366,9 @@ export function generatePublicPath(
     return "";
   }
 
-  const base = path.parse(joinedPath).base;
-
-  console.log(base);
+  const basename = path.parse(joinedPath).base;
+  const base = path.parse(joinedPath).dir;
+  const lastPart = path.parse(base).base;
 
   switch (codebase) {
     case "remix":
@@ -376,7 +376,7 @@ export function generatePublicPath(
     case "react":
       return "/_assetize";
     case "next":
-      return `${joinedPath.split("/").slice(0, -1).join("/")}/${base}`;
+      return `/${lastPart}/${basename}`;
     case "vue":
       return "/_assetize";
     case "svelte":

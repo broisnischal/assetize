@@ -29,6 +29,8 @@ public
 tsup.config.ts
 assetize.config.ts
 assetize.config.js
+assetize.config.mjs
+assetize.config.cjs
 
 .eslintrc.cjs
 .editorconfig
