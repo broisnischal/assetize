@@ -121,9 +121,9 @@ export async function generateConfigFile() {
       outdir: () =>
         p.text({
           message: "Where is build file output directory?",
-          defaultValue: "./src",
-          initialValue: "./src",
-          placeholder: "./src, ./dist, etc.",
+          defaultValue: "./app",
+          initialValue: "./app",
+          placeholder: "./app, ./dist, etc.",
           validate: (value) => {
             if (!value) return "Please enter a path.";
             if (value[0] !== ".") return "Please enter a relative path.";
