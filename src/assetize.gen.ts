@@ -39,15 +39,10 @@ class AssetsImagesGen {
 
   private static instance: AssetsImagesGen;
 
-  static readonly Genetic: AssetItem = new AssetItem(
-    "./assets/images/Genetic.jpg",
-  );
-  static readonly ButtonImage: AssetItem = new AssetItem(
-    "./assets/images/button.png",
-  );
+  static readonly vercel: AssetItem = new AssetItem("public/images/vercel.png");
 
   static get images() {
-    return [this.Genetic, this.ButtonImage];
+    return [this.vercel];
   }
 }
 

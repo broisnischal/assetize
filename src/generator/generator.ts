@@ -102,22 +102,46 @@ export async function createClassIconsGen() {
   }`;
 }
 
-export function createClassImageGen() {
+export async function createClassImageGen() {
+  const config = await getConfig();
+
+  const mainRoute = path.join(
+    config.assets?.path ?? defaultConfigOptions.assets.path,
+    config.assets?.integrations?.images?.path ??
+      defaultConfigOptions.assets.integrations.images.path,
+  );
+
+  const files = fs.readdirSync(mainRoute, {
+    recursive: true,
+    withFileTypes: true,
+  });
+
   return `class AssetsImagesGen {
     constructor() {}
 
     private static instance: AssetsImagesGen;
 
-    static readonly Genetic: AssetItem = new AssetItem(
-      "./assets/images/Genetic.jpg",
-    );
-    static readonly ButtonImage: AssetItem = new AssetItem(
-      "./assets/images/button.png",
-    );
+    ${files
+      .map((file) => {
+        const fileName = file.name.split(".")[0]!;
 
-    static get images() {
-      return [this.Genetic, this.ButtonImage];
-    }
+        const joinedPath = path.join(mainRoute, file.name);
+
+        return `static readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
+        "${joinedPath}",
+      );`;
+      })
+      .join("\n")}
+
+      static get images() {
+        return [${files
+          .map((file) => {
+            const fileName = file.name.split(".")[0]!;
+            return `this.${convertCase(fileName, config.case)}`;
+          })
+          .join(",")}];
+        }
+
   }`;
 }
 
@@ -139,17 +163,19 @@ export function createClassFontGen() {
   `;
 }
 
-export function createMainClassAndExport() {
+export async function createMainClassAndExport() {
+  const config = await getConfig();
+
   return `
-  class MyAssets {
+  class ${config.className ?? defaultConfigOptions.className} {
     private constructor() {}
 
-    static readonly icons = AssetsIconsGen;
-    static readonly images = AssetsImagesGen;
-    static readonly fonts = AssetsFontsGen;
+    static readonly ${convertCase("icons", config.case)} = AssetsIconsGen;
+    static readonly ${convertCase("images", config.case)} = AssetsImagesGen;
+    static readonly ${convertCase("fonts", config.case)} = AssetsFontsGen;
   }
 
-  export default MyAssets;
+  export default ${config.className ?? defaultConfigOptions.className};
   `;
 }
 
@@ -169,7 +195,7 @@ export async function generateFile() {
     const generatedCode = `
         ${createAssetItem()}
         ${await createClassIconsGen()}
-        ${createClassImageGen()}
+        ${await createClassImageGen()}
         ${createClassFontGen()}
         ${createMainClassAndExport()}
         `;
