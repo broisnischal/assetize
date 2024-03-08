@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.20
+
+### Patch Changes
+
+- d4193a4: changes
+
 ## 0.0.19
 
 ### Patch Changes
