@@ -1,5 +1,12 @@
 # assetize
 
+## 0.0.21
+
+### Patch Changes
+
+- 5c77eec: mini
+- a5d40d5: minor fixes
+
 ## 0.0.20
 
 ### Patch Changes
