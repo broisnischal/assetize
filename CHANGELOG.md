@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.22
+
+### Patch Changes
+
+- ccaf44d: bug fixes
+
 ## 0.0.21
 
 ### Patch Changes
