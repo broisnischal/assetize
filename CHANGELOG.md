@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.16
+
+### Patch Changes
+
+- 32ff7db: minor fixes
+
 ## 0.0.15
 
 ### Patch Changes
