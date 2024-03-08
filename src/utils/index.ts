@@ -16,18 +16,20 @@ export function normalizeString(str: string): string {
 export function convertCase(input: string, type: Config["case"]): string {
   switch (type) {
     case "camel":
-      return input.replace(/[-_](\w)/g, (_, c) => c.toUpperCase());
+      return input.replace(/[-_\s](\w)/g, (_, c) => c.toUpperCase());
     case "pascal":
-      return input.replace(/(?:^|-|_)(\w)/g, (_, c) => c.toUpperCase());
+      return input.replace(/(?:^|[-_\s])(\w)/g, (_, c) => c.toUpperCase());
     case "kebab":
       return input
         .replace(/-/g, "_")
         .replace(/[^\w\s]/gi, "")
         .replace(/\s+/g, "");
     case "snake":
-      return input.replace(/[A-Z]/g, (match, index) =>
-        index === 0 ? match.toLowerCase() : `_${match.toLowerCase()}`,
-      );
+      return input
+        .replace(/[^a-zA-Z0-9]+/g, "_")
+        .replace(/[A-Z]/g, (match, index) =>
+          index === 0 ? match.toLowerCase() : `_${match.toLowerCase()}`,
+        );
     default:
       return input
         .replace(/-/g, "_")

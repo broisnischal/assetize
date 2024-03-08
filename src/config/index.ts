@@ -9,7 +9,7 @@ const integrationSchema = zod.object({
 });
 
 const configSchema = zod.object({
-  output: zod.string().default("./src").optional(),
+  output: zod.string().default("./app").optional(),
   outputFile: zod
     .string()
     .default("assetize.gen.ts")
@@ -271,7 +271,7 @@ export type AllowedFileTypes =
   (typeof allowedFileTypes)[keyof typeof allowedFileTypes];
 
 export const defaultConfigOptions = {
-  output: "./src",
+  output: "./app",
   outputFile: "assetize.gen.ts",
   lineLength: 80,
   className: "MyAssets",
