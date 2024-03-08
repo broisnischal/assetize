@@ -17,7 +17,7 @@
     "test:setup": "yarn unlink --global && yarn link --global",
     "setup": "chmod +x ./dist/main.js",
     "release": "pnpm run lint && pnpm run test && pnpm run build && changeset publish",
-    "build:gyp": "node-gyp "
+    "build:gyp": "node-gyp configure build"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +32,7 @@
     "cosmiconfig": "^9.0.0",
     "execa": "^8.0.1",
     "lodash": "^4.17.21",
+    "nan": "^2.19.0",
     "node-gyp": "^10.0.1",
     "ora": "^8.0.1",
     "picocolors": "^1.0.0",

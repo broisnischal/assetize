@@ -3,7 +3,9 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${env:HOME}/.node-gyp/10.16.2/include/node",
+                "${workspaceFolder}/node_modules/.pnpm/nan@2.19.0/node_modules/nan"
             ],
             "defines": [],
             "macFrameworkPath": [
