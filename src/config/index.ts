@@ -117,7 +117,6 @@ export async function getConfig() {
   if (!configResult) {
     logger.error("Couldn't find assetize.config.ts or assetize.config.js");
     process.exit(1);
-    // return undefined;
   }
 
   try {

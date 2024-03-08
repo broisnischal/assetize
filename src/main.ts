@@ -178,7 +178,7 @@ export async function generateConfigFile() {
     const s = p.spinner();
     s.start("Generating and writing config file");
 
-    const code = `import { defineAssetizeConfig } from "assetize/config";\n
+    const code = `import { defineAssetizeConfig } from "assetize";\n
     export default defineAssetizeConfig(${JSON.stringify(configCode, null, 2)} );`;
 
     const formattedCode = await prettier.format(code, {

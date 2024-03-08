@@ -136,9 +136,31 @@ export async function mergeDirectories(src: string, dest: string) {
 export async function createAssetsDirectory(assetsDir = "./assets") {
   try {
     await fs.ensureDir(assetsDir);
+    const config = await getConfig();
 
     //? TODO: create isssues to new directories
-    const subDirectories = ["icons", "images", "fonts", "audios"];
+    const directories = [
+      "icons",
+      "images",
+      "fonts",
+      "audios",
+      // "videos",
+      // "svgs",
+      // "pdfs",
+      // "docs",
+      // "others",
+    ];
+
+    const isIntegrationsEmpty =
+      Object.keys(config.assets?.integrations ?? {}).length === 0;
+
+    const subDirectories = isIntegrationsEmpty
+      ? directories
+      : Object.keys(config.assets?.integrations ?? directories).filter((dir) =>
+          directories.includes(dir),
+        );
+
+    //? TODO: create isssues to new directories
     for (const subDir of subDirectories) {
       const dirPath = path.join(assetsDir, subDir);
       try {
