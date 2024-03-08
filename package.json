@@ -21,7 +21,7 @@
     "rebuild": "node-gyp rebuild"
   },
   "exports": {
-    ".": "./dist/index.js",
+    ".": "./dist/**/*.{js,cjs,ts,mts,jsx,d.ts,mjs}",
     "./config": "./dist/config"
   },
   "keywords": [],
