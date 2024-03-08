@@ -1,3 +1,15 @@
+import { defineConfig } from "tsup";
+
+export default defineConfig({
+  clean: true,
+  dts: true,
+  entry: ["src/index.ts"],
+  format: ["esm", "cjs"],
+  sourcemap: true,
+  target: "esnext",
+  outDir: process.env.LOCAL === "true" ? "dist" : "." ,
+});
+
 // import { defineConfig } from "tsup";
 // // import tsconfig from "./tsconfig.json" with { type: "json" };
 
@@ -13,14 +25,3 @@
 //   clean: true,
 //   splitting: false,
 // });
-import { defineConfig } from "tsup";
-
-export default defineConfig({
-  clean: true,
-  dts: process.env.LOCAL === "true" ? true : false,
-  entry: ["src/index.ts"],
-  format: ["esm", "cjs"],
-  sourcemap: true,
-  target: "esnext",
-  outDir: "dist",
-});
