@@ -1,6 +1,6 @@
 
 
-#include <node.h>
+#include <nan.h>
 
 using v8::FunctionCallbackInfo;
 using v8::Isolate;

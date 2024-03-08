@@ -3,13 +3,10 @@
     {
       "target_name": "addon",
       "sources": [
-        "addon.cpp"
+        "src/addon.cc",
+        "src/node_version.h"
       ],
-      "include_dirs": [
-        "<!(node -e \"require('nan')\")"
-      ]
-    },
-
-  ],
-
+      "include_dirs": ["<!(node -e \"require('nan')\")"]
+    }
+  ]
 }
