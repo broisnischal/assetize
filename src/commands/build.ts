@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { Command } from "commander";
 import { logger } from "../utils/logger";
 import { generateAssetsFile } from "../generator/gen-func";
@@ -10,7 +9,7 @@ export const build = new Command()
   .action(async () => {
     await generateFile();
 
-    logger.info(`${chalk.green("Success!")} build file`);
+    logger.info(`Success build file`);
 
     process.exit(1);
   });

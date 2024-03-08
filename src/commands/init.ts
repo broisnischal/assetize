@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { Command } from "commander";
 import { logger } from "../utils/logger";
 
@@ -8,5 +7,5 @@ export const init = new Command()
   .action(async () => {
     // await configureLibraries();
 
-    logger.info(`${chalk.green("Success!")} Project initialization completed.`);
+    logger.info(`Success : Project initialization completed.`);
   });

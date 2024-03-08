@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { Command } from "commander";
 import { logger } from "../utils/logger";
 import { generateConfigFile } from "../main";

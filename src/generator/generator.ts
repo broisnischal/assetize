@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import prettier from "prettier";
 import { getConfig } from "../config/get-config";
-import { getCodebase } from "../utils";
+// import { getCodebase } from "../utils";
 import { logger } from "../utils/logger";
 
 export async function getFileContents() {
@@ -134,7 +134,10 @@ export async function generateFile() {
   try {
     const config = await getConfig();
 
-    const outputPath = path.join(config.output!, config.outputFile!);
+    const outputPath = path.join(
+      config.output ?? ".",
+      config.outputFile ?? "gen.assets.ts",
+    );
 
     const generatedCode = `
         ${createAssetItem()}

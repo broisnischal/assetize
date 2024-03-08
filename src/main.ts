@@ -144,7 +144,7 @@ export async function generateConfigFile() {
     const s = p.spinner();
     s.start("Generating and writing config file");
 
-    const code = `import { defineAssetizeConfig } from "assetize";
+    const code = `import { defineAssetizeConfig } from "assetize/config";
     export default defineAssetizeConfig(${JSON.stringify(configCode, null, 2)} );`;
 
     fs.writeFileSync("./assetize.config.ts", code);

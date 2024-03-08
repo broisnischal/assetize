@@ -5,7 +5,6 @@ import * as zod from "zod";
 import _ from "lodash";
 import { cosmiconfig } from "cosmiconfig";
 import { logger } from "../utils/logger";
-import { assetsDirectoryLike } from "./help-log";
 
 const integrationSchema = zod.object({
   path: zod.string(),
@@ -116,7 +115,7 @@ export async function getConfigFilePath() {
 export async function getConfig() {
   const configResult = await getExplorer().search();
 
-  console.log(configResult?.config);
+  // console.log(configResult?.config);
 
   if (!configResult) {
     // assetsDirectoryLike();
