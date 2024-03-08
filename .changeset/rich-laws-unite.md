@@ -1,5 +1,0 @@
----
-"assetize": minor
----
-
-Minor fixes
