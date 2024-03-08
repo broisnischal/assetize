@@ -25,9 +25,10 @@ seed.ts
 TODO.md
 CODE_OF_CONDUCT.md
 .husky
-
+public
 tsup.config.ts
 assetize.config.ts
+assetize.config.js
 
 .eslintrc.cjs
 .editorconfig
