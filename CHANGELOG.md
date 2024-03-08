@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.2
+
+### Patch Changes
+
+- c93f51a: added support for cross platform
+
 ## 2.1.1
 
 ### Patch Changes
