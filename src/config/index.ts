@@ -59,8 +59,9 @@ const configSchema = zod.object({
   codebase: zod
     .enum([
       "remix",
-      "react",
       "next",
+      "vite",
+      "react",
       "solid",
       "svelte",
       "vue",

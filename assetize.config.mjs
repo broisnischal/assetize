@@ -1,4 +1,5 @@
 import { defineAssetizeConfig } from "assetize";
+
 export default defineAssetizeConfig({
   lineLength: 80,
   codebase: "next",
