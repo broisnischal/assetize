@@ -1,8 +1,8 @@
 import * as zod from "zod";
-
 import _ from "lodash";
 import { cosmiconfig } from "cosmiconfig";
 import { logger } from "../utils/logger";
+import pc from "picocolors";
 
 const integrationSchema = zod.object({
   path: zod.string(),
@@ -105,6 +105,9 @@ export async function getConfigFilePath() {
 
   if (!configResult) {
     logger.error("Couldn't find assetize.config.ts or assetize.config.js");
+    logger.info(
+      `Please run ${pc.italic(`\`npx assetize generate\``)} to initialize config.`,
+    );
     process.exit(1);
   }
 
@@ -115,7 +118,12 @@ export async function getConfig() {
   const configResult = await getExplorer().search();
 
   if (!configResult) {
-    logger.error("Couldn't find assetize.config.ts or assetize.config.js");
+    logger.error(
+      `\nCouldn't find ${pc.cyan(pc.italic(`assetize.config.{js,ts,cjs,mjs}`))} \n`,
+    );
+    logger.info(
+      `Please run ${pc.bgRed(pc.italic(`\`npx assetize generate\``))} to initialize config.\n`,
+    );
     process.exit(1);
   }
 

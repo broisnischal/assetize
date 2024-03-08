@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { Config, getConfig } from "../config";
 import fs from "fs-extra";
-import path from "node:path";
+import path, { join } from "node:path";
 import { exec, spawn } from "node:child_process";
 import { logger } from "./logger";
 
@@ -222,23 +222,6 @@ export function detectPackageManager(): PackageManager {
   return "unknown";
 }
 
-const npmInstallCommand = "npm install assetize";
-const yarnInstallCommand = "yarn add assetize";
-const pnpmInstallCommand = "pnpm install assetize";
-const bunInstallCommand = "bun install assetize";
-
-exec(npmInstallCommand, (error, stdout, stderr) => {
-  if (error) {
-    console.error(`Error executing command: ${error.message}`);
-    return;
-  }
-  if (stderr) {
-    console.error(`Command stderr: ${stderr}`);
-    return;
-  }
-  console.log(`Dependencies installed successfully:\n${stdout}`);
-});
-
 export async function installDependencies() {
   const pkgmanager = detectPackageManager();
   logger.info(`Package manager detected: ${pkgmanager}`);
@@ -372,5 +355,39 @@ export async function installDependencies() {
     default:
       console.error("Unsupported package manager");
       process.exit(1);
+  }
+}
+
+export function generatePublicPath(
+  joinedPath: string,
+  codebase: Config["codebase"],
+) {
+  if (!joinedPath) {
+    return "";
+  }
+
+  const base = path.parse(joinedPath).base;
+
+  console.log(base);
+
+  switch (codebase) {
+    case "remix":
+      return joinedPath;
+    case "react":
+      return "/_assetize";
+    case "next":
+      return `${joinedPath.split("/").slice(0, -1).join("/")}/${base}`;
+    case "vue":
+      return "/_assetize";
+    case "svelte":
+      return "/_assetize";
+    case "solid":
+      return "/_assetize";
+    case "astro":
+      return "/_assetize";
+    case "nuxt":
+      return "/_assetize";
+    default:
+      return "";
   }
 }
