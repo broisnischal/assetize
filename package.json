@@ -1,6 +1,6 @@
 {
   "name": "assetize",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "",
   "private": false,
   "main": "dist/index.js",
@@ -30,7 +30,7 @@
   "dependencies": {
     "@clack/prompts": "^0.7.0",
     "@types/fs-extra": "^11.0.4",
-    "assetize": "^0.0.25",
+    "assetize": "^0.0.26",
     "commander": "^12.0.0",
     "cosmiconfig": "^9.0.0",
     "execa": "^8.0.1",
