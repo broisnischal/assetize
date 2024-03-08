@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { Command } from "commander";
-import { logger } from "../logger";
+import { logger } from "../utils/logger";
 
 export const init = new Command()
   .name("init")

@@ -4,7 +4,7 @@ import path from "node:path";
 import prettier from "prettier";
 import { getConfig } from "../config/get-config";
 import { getCodebase } from "../utils";
-import { logger } from "../logger";
+import { logger } from "../utils/logger";
 
 export async function getFileContents() {
   const config = await getConfig();

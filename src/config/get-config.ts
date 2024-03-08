@@ -4,7 +4,7 @@ import * as zod from "zod";
 
 import _ from "lodash";
 import { cosmiconfig } from "cosmiconfig";
-import { logger } from "../logger";
+import { logger } from "../utils/logger";
 import { assetsDirectoryLike } from "./help-log";
 
 const integrationSchema = zod.object({

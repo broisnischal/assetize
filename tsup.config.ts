@@ -3,6 +3,7 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   dts: true,
+  entry: ["src/**"],
   format: ["esm"],
   outDir: "dist",
   ignoreWatch: ["node_modules", "build", "dist"],
@@ -10,4 +11,5 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   target: "es2022",
+  splitting: false,
 });

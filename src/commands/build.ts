@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { Command } from "commander";
-import { logger } from "../logger";
+import { logger } from "../utils/logger";
 import { generateAssetsFile } from "../generator/gen-func";
 import { generateFile } from "../generator/generator";
 

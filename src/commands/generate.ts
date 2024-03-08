@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { Command } from "commander";
-import { logger } from "../logger";
+import { logger } from "../utils/logger";
 import { generateConfigFile } from "../main";
 
 export const generate = new Command()
