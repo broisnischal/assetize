@@ -28,3 +28,9 @@ CODE_OF_CONDUCT.md
 
 tsup.config.ts
 assetize.config.ts
+
+.eslintrc.cjs
+.editorconfig
+binding.gyp
+tests
+assets
