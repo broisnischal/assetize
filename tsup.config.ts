@@ -1,12 +1,13 @@
 import { defineConfig } from "tsup";
+// import tsconfig from "./tsconfig.json" with { type: "json" };
 
 export default defineConfig({
-  clean: true,
   dts: true,
-  // entry: ["src/**/*.{ts,tsx}"],
   format: ["esm"],
-  sourcemap: true,
-  target: "esnext",
   outDir: "dist",
   ignoreWatch: ["node_modules", "build", "dist"],
+  minify: true,
+  sourcemap: true,
+  clean: true,
+  target: "es2022",
 });
