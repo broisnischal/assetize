@@ -31,9 +31,9 @@ export async function generateConfigFile() {
             if (!value) return "Please enter a path.";
             if (value[0] !== ".") return "Please enter a relative path.";
 
-            if (directoryContainsFiles(value)) {
-              return "Directory is not empty!";
-            }
+            // if (directoryContainsFiles(value)) {
+            //   return "Directory is not empty!";
+            // }
           },
         }),
 
@@ -144,7 +144,7 @@ export async function generateConfigFile() {
     const s = p.spinner();
     s.start("Generating and writing config file");
 
-    const code = `import { defineAssetizeConfig } from "assetize/config";
+    const code = `import { defineAssetizeConfig } from "assetize/config";\n
     export default defineAssetizeConfig(${JSON.stringify(configCode, null, 2)} );`;
 
     fs.writeFileSync("./assetize.config.ts", code);

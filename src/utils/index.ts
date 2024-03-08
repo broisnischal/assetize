@@ -37,7 +37,7 @@ export function getPackageJSON(): PackageJSON | undefined {
 }
 
 export async function getCodebase(): Promise<Config["codebase"] | undefined> {
-  const config = await getConfig();
+  // const config = await getConfig();
 
   try {
     const packageJSON = getPackageJSON();
