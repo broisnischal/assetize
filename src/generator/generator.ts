@@ -85,7 +85,7 @@ export async function createClassIconsGen() {
 
         const joinedPath = path.join(mainRoute, file.name);
 
-        return `static readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
+        return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
         "${joinedPath}",
       );`;
       })
@@ -145,20 +145,46 @@ export async function createClassImageGen() {
   }`;
 }
 
-export function createClassFontGen() {
+export async function createClassFontGen() {
+  const config = await getConfig();
+
+  const mainRoute = path.join(
+    config.assets?.path ?? defaultConfigOptions.assets.path,
+    config.assets?.integrations?.fonts?.path ??
+      defaultConfigOptions.assets.integrations.fonts?.path,
+  );
+
+  const files = fs.readdirSync(mainRoute, {
+    recursive: true,
+    withFileTypes: true,
+  });
+
   return `
   class AssetsFontsGen {
     constructor() {}
 
     private static instance: AssetsFontsGen;
 
-    static readonly Genetic: AssetItem = new AssetItem(
-      "./assets/fonts/Genetic.ttf",
-    );
+    ${files
+      .map((file) => {
+        const fileName = file.name.split(".")[0]!;
 
-    static get fonts() {
-      return [this.Genetic];
-    }
+        const joinedPath = path.join(mainRoute, file.name);
+
+        return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
+        "${joinedPath}",
+      );`;
+      })
+      .join("\n")}
+
+      static get fonts() {
+        return [${files
+          .map((file) => {
+            const fileName = file.name.split(".")[0]!;
+            return `this.${convertCase(fileName, config.case)}`;
+          })
+          .join(",")}];
+        }
   }
   `;
 }
@@ -196,8 +222,8 @@ export async function generateFile() {
         ${createAssetItem()}
         ${await createClassIconsGen()}
         ${await createClassImageGen()}
-        ${createClassFontGen()}
-        ${createMainClassAndExport()}
+        ${await createClassFontGen()}
+        ${await createMainClassAndExport()}
         `;
 
     const formattedCode = await prettier.format(generatedCode, {

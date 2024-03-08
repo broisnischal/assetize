@@ -25,9 +25,11 @@ class AssetsIconsGen {
 
   private static instance: AssetsIconsGen;
 
+  // next-test - path : public/icons/next-test.svg
   static readonly next_test: AssetItem = new AssetItem(
     "public/icons/next-test.svg",
   );
+  // vercel - path : public/icons/vercel.svg
   static readonly vercel: AssetItem = new AssetItem("public/icons/vercel.svg");
 
   static get icons() {
@@ -51,12 +53,11 @@ class AssetsFontsGen {
 
   private static instance: AssetsFontsGen;
 
-  static readonly Genetic: AssetItem = new AssetItem(
-    "./assets/fonts/Genetic.ttf",
-  );
+  // vercel - path : public/fonts/vercel.ttf
+  static readonly vercel: AssetItem = new AssetItem("public/fonts/vercel.ttf");
 
   static get fonts() {
-    return [this.Genetic];
+    return [this.vercel];
   }
 }
 
