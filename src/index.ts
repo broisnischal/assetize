@@ -5,7 +5,7 @@ import packageJSON from "../package.json" with { type: "json" };
 import { build } from "./commands/build";
 import { generate } from "./commands/generate";
 import { init } from "./commands/init";
-
+import { Config } from "./config";
 
 process.on("SIGINT", () => process.exit(0));
 process.on("SIGTERM", () => process.exit(0));
@@ -41,5 +41,18 @@ const program = new Command()
 program.addCommand(generate).addCommand(build).addCommand(init);
 
 program.parse();
+
+/**
+ * Define Assetize Config
+ *
+ * @export
+ * @param {AssetizeConfigOptions} options
+ * @returns {AssetizeConfigOptions}
+ */
+export function defineAssetizeConfig(options: Config) {
+  return options;
+}
+
+export type AssetizeConfig = ReturnType<typeof defineAssetizeConfig>;
 
 export * from "./config";

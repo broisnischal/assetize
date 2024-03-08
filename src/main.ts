@@ -26,7 +26,8 @@ export async function generateConfigFile() {
         p.text({
           message: "Where is your root asset folder?",
           placeholder: "./assets, ./public, ./src, etc.",
-          defaultValue: "./assets",
+          defaultValue: "./public",
+          initialValue: "./public",
           validate: (value) => {
             if (!value) return "Please enter a path.";
             if (value[0] !== ".") return "Please enter a relative path.";
@@ -61,31 +62,27 @@ export async function generateConfigFile() {
           initialValue: "80",
           validate: (value) => (value ? undefined : "Please enter a number"),
         }),
-      // type: ({ results }) =>
-      //   p.select({
-      //     message: `Pick a project type within "${results.path}"`,
-      //     initialValue: "ts",
-      //     maxItems: 5,
-      //     options: [
-      //       { value: "ts", label: "TypeScript" },
-      //       { value: "js", label: "JavaScript" },
-      //       { value: "rust", label: "Rust" },
-      //       { value: "go", label: "Go" },
-      //       { value: "python", label: "Python" },
-      //       { value: "coffee", label: "CoffeeScript", hint: "oh no" },
-      //     ],
-      //   }),
-      // tools: () =>
-      //   p.multiselect({
-      //     message: "Select additional tools.",
-      //     initialValues: ["prettier", "eslint"],
-      //     options: [
-      //       { value: "prettier", label: "Prettier", hint: "recommended" },
-      //       { value: "eslint", label: "ESLint", hint: "recommended" },
-      //       { value: "stylelint", label: "Stylelint" },
-      //       { value: "gh-action", label: "GitHub Action" },
-      //     ],
-      //   }),
+      filetype: ({}) =>
+        p.select({
+          message: `Pick a config file type.`,
+          initialValue: "ts",
+          options: [
+            { value: "ts", label: "TypeScript", hint: "assetize.config.ts" },
+            { value: "js", label: "JavaScript", hint: "assetize.config.js" },
+          ],
+          maxItems: 1,
+        }),
+      integrations: () =>
+        p.multiselect({
+          message: "Select folder integrations.",
+          initialValues: ["images", "icons"],
+          options: [
+            { value: "icons", label: "Icons", hint: "recommended" },
+            { value: "images", label: "Images", hint: "recommended" },
+            { value: "fonts", label: "Fonts" },
+            { value: "audios", label: "Audios" },
+          ],
+        }),
       case: () =>
         p.select({
           message: "Convert case",
@@ -116,6 +113,30 @@ export async function generateConfigFile() {
           defaultValue: "MyAssets",
           placeholder: "MyAssets",
         }),
+      outdir: () =>
+        p.text({
+          message: "Where is build file output directory?",
+          defaultValue: "./src",
+          initialValue: "./src",
+          placeholder: "./src, ./dist, etc.",
+          validate: (value) => {
+            if (!value) return "Please enter a path.";
+            if (value[0] !== ".") return "Please enter a relative path.";
+          },
+        }),
+      outputFileName: () =>
+        p.text({
+          message: "Output file name?",
+          defaultValue: "assetize.gen.ts",
+          initialValue: "assetize.gen.ts",
+          placeholder: "Name for generated file",
+          validate: (value) => {
+            if (value.includes("/"))
+              return "Please enter a file name without path.";
+
+            if (!value) return "Please enter a file name.";
+          },
+        }),
       generate: () =>
         p.confirm({
           message: "Generate a config file? (y/n)",
@@ -135,9 +156,22 @@ export async function generateConfigFile() {
     codebase: project.codebase ?? detectedCodeBase,
     assets: {
       path: project.path,
+      integrations: {
+        ...project.integrations.reduce(
+          (acc, cur) => ({
+            ...acc,
+            [cur]: {
+              path: `${project.path}/${cur}`,
+            },
+          }),
+          {},
+        ),
+      },
     },
     case: project.case,
     className: project.className,
+    output: project.outdir,
+    outputFile: project.outputFileName,
   };
 
   if (project.generate) {
@@ -147,28 +181,26 @@ export async function generateConfigFile() {
     const code = `import { defineAssetizeConfig } from "assetize/config";\n
     export default defineAssetizeConfig(${JSON.stringify(configCode, null, 2)} );`;
 
-    fs.writeFileSync("./assetize.config.ts", code);
-
     const formattedCode = await prettier.format(code, {
       parser: "typescript",
     });
 
-    fs.writeFileSync("./assetize.config.ts", formattedCode);
+    fs.writeFileSync(`./assetize.config.${project.filetype}`, formattedCode);
 
     s.stop("Assetized!");
   } else {
     console.log("\nCancelled generation!\n");
   }
 
-  // let nextSteps = `cd ${project.path}        \n${
-  //   project.generate ? "" : "pnpm install\n"
-  // }pnpm dev`;
+  let nextSteps = `        \n${
+    project.generate ? "npx assetize init" : "npx assetize help\n"
+  }`;
 
-  // p.note(nextSteps, "Next steps.");
+  p.note(nextSteps, "Next steps.");
 
-  // p.outro(
-  //   `Problems? ${color.underline(color.cyan("https://example.com/issues"))}`,
-  // );
+  p.outro(
+    `Problems? ${color.underline(color.cyan("https://github.com/broisnischal/assetize/issues"))}`,
+  );
 }
 
 // generateConfigFile().catch(console.error);

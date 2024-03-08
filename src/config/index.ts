@@ -263,19 +263,6 @@ const allowedFileTypes = {
 export type AllowedFileTypes =
   (typeof allowedFileTypes)[keyof typeof allowedFileTypes];
 
-/**
- * Define Assetize Config
- *
- * @export
- * @param {AssetizeConfigOptions} options
- * @returns {AssetizeConfigOptions}
- */
-export function defineAssetizeConfig(options: Config) {
-  return options;
-}
-
-export type AssetizeConfig = ReturnType<typeof defineAssetizeConfig>;
-
 export const defaultConfigOptions = {
   output: "./src",
   outputFile: "assetize.gen.ts",
@@ -283,7 +270,7 @@ export const defaultConfigOptions = {
   className: "MyAssets",
   case: "camel",
   assets: {
-    path: "assets",
+    path: "public",
     integrations: {
       fonts: {
         path: "fonts",

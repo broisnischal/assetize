@@ -20,10 +20,6 @@
     "build:gyp": "node-gyp configure build",
     "rebuild": "node-gyp rebuild"
   },
-  "exports": {
-    ".": "./dist/**/*.{js,cjs,ts,mts,jsx,d.ts,mjs}",
-    "./config": "./dist/config"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
