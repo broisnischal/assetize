@@ -1,5 +1,0 @@
----
-"assetize": major
----
-
-Relased note
