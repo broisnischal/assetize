@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.14
+
+### Patch Changes
+
+- 2c8d72b: npx changeset
+
 ## 0.0.13
 
 ### Patch Changes
