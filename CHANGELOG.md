@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.1
+
+### Patch Changes
+
+- b831d13: changes main folder to src
+
 ## 2.1.0
 
 ### Minor Changes
