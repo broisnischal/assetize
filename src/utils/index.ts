@@ -3,6 +3,7 @@ import { Config, getConfig } from "../config";
 import fs from "fs-extra";
 import path from "node:path";
 import { exec, spawn } from "node:child_process";
+import { logger } from "./logger";
 
 export function normalizeString(str: string): string {
   const normalizedStr = str
@@ -194,8 +195,36 @@ export async function createAssetsDirectory(assetsDir = "./assets") {
   }
 }
 
+type PackageManager = "npm" | "yarn" | "pnpm" | "bun" | "unknown";
+
+export function detectPackageManager(): PackageManager {
+  const projectDir = process.cwd();
+
+  if (fs.existsSync(path.join(projectDir, "yarn.lock"))) {
+    return "yarn";
+  }
+
+  if (
+    fs.existsSync(path.join(projectDir, "pnpm-lock.yaml")) ||
+    fs.existsSync(path.join(projectDir, "pnpm-workspace.yaml"))
+  ) {
+    return "pnpm";
+  }
+
+  if (fs.existsSync(path.join(projectDir, "package-lock.json"))) {
+    return "npm";
+  }
+
+  if (fs.existsSync(path.join(projectDir, "bun.lockb"))) {
+    return "bun";
+  }
+
+  return "unknown";
+}
+
 const npmInstallCommand = "npm install assetize";
-const yarnInstallCommand = "yarn install assetize";
+const yarnInstallCommand = "yarn add assetize";
+const pnpmInstallCommand = "pnpm install assetize";
 const bunInstallCommand = "bun install assetize";
 
 exec(npmInstallCommand, (error, stdout, stderr) => {
@@ -211,32 +240,137 @@ exec(npmInstallCommand, (error, stdout, stderr) => {
 });
 
 export async function installDependencies() {
-  const command = "pnpm";
-  const args = ["install", "assetize"];
+  const pkgmanager = detectPackageManager();
+  logger.info(`Package manager detected: ${pkgmanager}`);
 
-  const childProcess = spawn(command, args, {});
+  switch (pkgmanager) {
+    case "yarn": {
+      const command = "yarn";
+      const args = ["add", "assetize"];
 
-  childProcess.on("message", (message) => {
-    // console.log(message);
-  });
+      const childProcess = spawn(command, args, {});
 
-  childProcess.on("spawn", () => {
-    console.log("Installing dependencies...");
-  });
+      childProcess.on("message", (message) => {
+        // console.log(message);
+      });
 
-  childProcess.on("error", (error) => {
-    console.log(error.cause);
-    console.error(`Error executing command: ${error.message}`);
-    process.exit(1);
-  });
+      childProcess.on("spawn", () => {
+        console.log("Installing dependencies...");
+      });
 
-  childProcess.on("close", (code) => {
-    if (code === 0) {
-      console.log("Dependencies installed successfully");
-      process.exit(0);
-    } else {
-      console.error(`Dependencies installation failed with code ${code}`);
-      process.exit(1);
+      childProcess.on("error", (error) => {
+        console.log(error.cause);
+        console.error(`Error executing command: ${error.message}`);
+        process.exit(1);
+      });
+
+      childProcess.on("close", (code) => {
+        if (code === 0) {
+          console.log("Dependencies installed successfully");
+          process.exit(0);
+        } else {
+          console.error(`Dependencies installation failed with code ${code}`);
+          process.exit(1);
+        }
+      });
+
+      return;
     }
-  });
+    case "pnpm": {
+      const command = "pnpm";
+      const args = ["install", "assetize"];
+
+      const childProcess = spawn(command, args, {});
+
+      childProcess.on("message", (message) => {
+        // console.log(message);
+      });
+
+      childProcess.on("spawn", () => {
+        console.log("Installing dependencies...");
+      });
+
+      childProcess.on("error", (error) => {
+        console.log(error.cause);
+        console.error(`Error executing command: ${error.message}`);
+        process.exit(1);
+      });
+
+      childProcess.on("close", (code) => {
+        if (code === 0) {
+          console.log("Dependencies installed successfully");
+          process.exit(0);
+        } else {
+          console.error(`Dependencies installation failed with code ${code}`);
+          process.exit(1);
+        }
+      });
+      return;
+    }
+    case "npm": {
+      const command = "npm";
+      const args = ["install", "assetize"];
+
+      const childProcess = spawn(command, args, {});
+
+      childProcess.on("message", (message) => {
+        // console.log(message);
+      });
+
+      childProcess.on("spawn", () => {
+        console.log("Installing dependencies...");
+      });
+
+      childProcess.on("error", (error) => {
+        console.log(error.cause);
+        console.error(`Error executing command: ${error.message}`);
+        process.exit(1);
+      });
+
+      childProcess.on("close", (code) => {
+        if (code === 0) {
+          console.log("Dependencies installed successfully");
+          process.exit(0);
+        } else {
+          console.error(`Dependencies installation failed with code ${code}`);
+          process.exit(1);
+        }
+      });
+      return;
+    }
+    case "bun": {
+      const command = "bun";
+      const args = ["install", "assetize"];
+
+      const childProcess = spawn(command, args, {});
+
+      childProcess.on("message", (message) => {
+        // console.log(message);
+      });
+
+      childProcess.on("spawn", () => {
+        console.log("Installing dependencies...");
+      });
+
+      childProcess.on("error", (error) => {
+        console.log(error.cause);
+        console.error(`Error executing command: ${error.message}`);
+        process.exit(1);
+      });
+
+      childProcess.on("close", (code) => {
+        if (code === 0) {
+          console.log("Dependencies installed successfully");
+          process.exit(0);
+        } else {
+          console.error(`Dependencies installation failed with code ${code}`);
+          process.exit(1);
+        }
+      });
+      return;
+    }
+    default:
+      console.error("Unsupported package manager");
+      process.exit(1);
+  }
 }
