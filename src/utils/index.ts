@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { Config, getConfig } from "../config";
-import fs from "node:fs";
+import fs from "fs-extra";
 import path from "node:path";
 
 export async function convertCase(value: string): Promise<string> {
@@ -115,5 +115,46 @@ export function directoryContainsFiles(directoryPath: string): boolean {
   } catch (error) {
     console.error("Error checking directory:", error);
     return false;
+  }
+}
+
+export async function mergeDirectories(src: string, dest: string) {
+  const files = await fs.readdir(src);
+  for (const file of files) {
+    const srcPath = path.join(src, file);
+    const destPath = path.join(dest, file);
+    const stats = await fs.stat(srcPath);
+    if (stats.isDirectory()) {
+      await fs.ensureDir(destPath);
+      await mergeDirectories(srcPath, destPath);
+    } else {
+      await fs.copyFile(srcPath, destPath);
+    }
+  }
+}
+
+export async function createAssetsDirectory(assetsDir = "./assets") {
+  try {
+    await fs.ensureDir(assetsDir);
+
+    const subDirectories = ["icons", "images", "fonts", "audios"];
+    for (const subDir of subDirectories) {
+      const dirPath = path.join(assetsDir, subDir);
+      try {
+        await fs.ensureDir(dirPath);
+        console.log(`Created directory '${dirPath}'.`);
+      } catch (err: any) {
+        if (err.code === "EEXIST") {
+          console.log(`Directory '${dirPath}' already exists.`);
+          await mergeDirectories(dirPath, dirPath);
+          // console.log(`Merged files from '${dirPath}'.`);
+        } else {
+          throw err;
+        }
+      }
+    }
+    console.log(`Success : Created assets directory.`);
+  } catch (error: any) {
+    console.error(error.message);
   }
 }

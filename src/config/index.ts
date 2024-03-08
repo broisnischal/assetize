@@ -113,12 +113,22 @@ export async function getConfigFilePath() {
 export async function getConfig() {
   const configResult = await getExplorer().search();
 
-  // console.log(configResult?.config);
-
   if (!configResult) {
-    // assetsDirectoryLike();
-    logger.error("Couldn't find assetize.config.ts or assetize.config.js");
-    process.exit(1);
+    // logger.error("Couldn't find assetize.config.ts or assetize.config.js");
+    // process.exit(1);
+
+    return {
+      output: "./src",
+      outputFile: "assetize.gen.ts",
+      lineLength: 80,
+      className: "MyAssets",
+      case: "camel",
+      assets: {
+        path: "assets",
+      },
+      codebase: "remix",
+      minifyAssets: true,
+    } satisfies Config;
   }
 
   try {
