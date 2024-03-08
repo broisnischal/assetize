@@ -7,7 +7,6 @@ export default defineConfig({
   format: ["esm", "cjs"],
   sourcemap: true,
   target: "esnext",
-  outDir: process.env.LOCAL === "true" ? "dist" : "." ,
 });
 
 // import { defineConfig } from "tsup";

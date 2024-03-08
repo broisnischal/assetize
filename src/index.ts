@@ -6,6 +6,7 @@ import { build } from "./commands/build";
 import { generate } from "./commands/generate";
 import { init } from "./commands/init";
 
+
 process.on("SIGINT", () => process.exit(0));
 process.on("SIGTERM", () => process.exit(0));
 
@@ -41,5 +42,4 @@ program.addCommand(generate).addCommand(build).addCommand(init);
 
 program.parse();
 
-// export * from "./config/assetize.config";
-// export * from "./generator/generator";
+export * from "./config";
