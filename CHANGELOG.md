@@ -1,5 +1,12 @@
 # assetize
 
+## 2.0.0
+
+### Major Changes
+
+- 8185ac9: Relased note
+- 5f5fcd5: Major Release
+
 ## 0.0.26
 
 ### Patch Changes
