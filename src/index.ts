@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { getFileContents } from "./generator/generator";
-import { addScriptToPackageJSON, getPackageJSON } from "./utils";
 import packageJSON from "../package.json" with { type: "json" };
-import { init } from "./commands/generate";
 import { build } from "./commands/build";
+import { generate } from "./commands/generate";
+import { init } from "./commands/init";
 
 process.on("SIGINT", () => process.exit(0));
 process.on("SIGTERM", () => process.exit(0));
@@ -38,7 +37,7 @@ const program = new Command()
   .description("generates the assets class file for your project")
   .version(packageJSON.version, "-v, --version", "display the version number");
 
-program.addCommand(init).addCommand(build);
+program.addCommand(generate).addCommand(build).addCommand(init);
 
 program.parse();
 

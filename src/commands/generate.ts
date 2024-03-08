@@ -3,9 +3,9 @@ import { Command } from "commander";
 import { logger } from "../logger";
 import { generateConfigFile } from "../main";
 
-export const init = new Command()
-  .name("init")
-  .description("initialize your project and choose libraries")
+export const generate = new Command()
+  .name("generate")
+  .description("Generate config file for assetize.")
   .action(async () => {
     await generateConfigFile().catch(console.error);
 
