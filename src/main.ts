@@ -161,7 +161,7 @@ export async function generateConfigFile() {
           (acc, cur) => ({
             ...acc,
             [cur]: {
-              path: `${project.path}/${cur}`,
+              path: `./${cur}`,
             },
           }),
           {},
