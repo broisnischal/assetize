@@ -1,5 +1,13 @@
 # assetize
 
+## 0.0.26
+
+### Patch Changes
+
+- f2487fe: minor ready for production v1
+- Updated dependencies [f2487fe]
+  - assetize@0.0.26
+
 ## 0.0.25
 
 ### Patch Changes
