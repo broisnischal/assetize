@@ -1,0 +1,5 @@
+---
+"assetize": patch
+---
+
+minor fixes
