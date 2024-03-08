@@ -4,12 +4,12 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   dts: true,
   entry: ["src/**"],
-  format: ["esm", "cjs"],
+  format: ["esm"],
   outDir: "dist",
-  ignoreWatch: ["node_modules", "build", "dist"],
+  tsconfig: "tsconfig.json",
+  target: "es2022",
   minify: true,
   sourcemap: true,
   clean: true,
-  target: "es2022",
   splitting: false,
 });
