@@ -25,16 +25,13 @@ class AssetsIconsGen {
 
   private static instance: AssetsIconsGen;
 
-  /// FILE path : assets/icons/Genetic.svg
-  static readonly Genetic: AssetItem = new AssetItem(
-    "./assets/icons/Genetic.svg",
+  static readonly next_test: AssetItem = new AssetItem(
+    "public/icons/next-test.svg",
   );
-  static readonly button: AssetItem = new AssetItem(
-    "./assets/icons/button.svg",
-  );
+  static readonly vercel: AssetItem = new AssetItem("public/icons/vercel.svg");
 
   static get icons() {
-    return [this.Genetic, this.button];
+    return [this.next_test, this.vercel];
   }
 }
 class AssetsImagesGen {

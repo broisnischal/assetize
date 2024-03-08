@@ -3,20 +3,34 @@ import { Config, getConfig } from "../config";
 import fs from "fs-extra";
 import path from "node:path";
 
-export async function convertCase(value: string): Promise<string> {
-  const config = await getConfig();
+export function normalizeString(str: string): string {
+  const normalizedStr = str
+    .replace(/-/g, "_")
+    .replace(/[^\w\s]/gi, "")
+    .replace(/\s+/g, "");
+  return normalizedStr;
+}
 
-  switch (config.case) {
+export function convertCase(input: string, type: Config["case"]): string {
+  switch (type) {
     case "camel":
-      return _.camelCase(value);
-    case "kebab":
-      return _.kebabCase(value);
+      return input.replace(/[-_](\w)/g, (_, c) => c.toUpperCase());
     case "pascal":
-      return _.upperFirst(_.camelCase(value));
+      return input.replace(/(?:^|-|_)(\w)/g, (_, c) => c.toUpperCase());
+    case "kebab":
+      return input
+        .replace(/-/g, "_")
+        .replace(/[^\w\s]/gi, "")
+        .replace(/\s+/g, "");
     case "snake":
-      return _.snakeCase(value);
+      return input.replace(/[A-Z]/g, (match, index) =>
+        index === 0 ? match.toLowerCase() : `_${match.toLowerCase()}`,
+      );
     default:
-      return value;
+      return input
+        .replace(/-/g, "_")
+        .replace(/[^\w\s]/gi, "")
+        .replace(/\s+/g, "");
   }
 }
 

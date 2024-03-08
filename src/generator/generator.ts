@@ -5,6 +5,8 @@ import prettier from "prettier";
 import { defaultConfigOptions, getConfig } from "../config";
 // import { getCodebase } from "../utils";
 import { logger } from "../utils/logger";
+import { Config } from "../config";
+import { convertCase, normalizeString } from "../utils";
 
 export async function getFileContents() {
   const config = await getConfig();
@@ -58,7 +60,7 @@ class AssetItem {
 }`;
 }
 
-export async function createClassSvgGen() {
+export async function createClassIconsGen() {
   const config = await getConfig();
 
   const mainRoute = path.join(
@@ -72,23 +74,30 @@ export async function createClassSvgGen() {
     withFileTypes: true,
   });
 
-  console.log(files);
-
   return `class AssetsIconsGen {
     constructor() {}
 
     private static instance: AssetsIconsGen;
 
-    /// FILE path : assets/icons/Genetic.svg
-    static readonly Genetic: AssetItem = new AssetItem(
-      "./assets/icons/Genetic.svg",
-    );
-    static readonly button: AssetItem = new AssetItem(
-      "./assets/icons/button.svg",
-    );
+    ${files
+      .map((file) => {
+        const fileName = file.name.split(".")[0]!;
+
+        const joinedPath = path.join(mainRoute, file.name);
+
+        return `static readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
+        "${joinedPath}",
+      );`;
+      })
+      .join("\n")}
 
     static get icons() {
-      return [this.Genetic, this.button];
+      return [${files
+        .map((file) => {
+          const fileName = file.name.split(".")[0]!;
+          return `this.${convertCase(fileName, config.case)}`;
+        })
+        .join(",")}];
     }
   }`;
 }
@@ -159,7 +168,7 @@ export async function generateFile() {
 
     const generatedCode = `
         ${createAssetItem()}
-        ${await createClassSvgGen()}
+        ${await createClassIconsGen()}
         ${createClassImageGen()}
         ${createClassFontGen()}
         ${createMainClassAndExport()}

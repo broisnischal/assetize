@@ -17,7 +17,7 @@ export default defineAssetizeConfig({
       },
     },
   },
-  case: "camel",
+  case: "kebab",
   className: "MyAssets",
   output: "./app",
   outputFile: "assetize.gen.ts",
