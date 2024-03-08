@@ -4,7 +4,7 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   dts: true,
   entry: ["src/**"],
-  format: ["esm"],
+  format: ["esm", "cjs"],
   outDir: "dist",
   ignoreWatch: ["node_modules", "build", "dist"],
   minify: true,
