@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.13
+
+### Patch Changes
+
+- 5a2e09d: bug fix, vitest
+
 ## 0.0.12
 
 ### Patch Changes
