@@ -7,8 +7,7 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "bin": {
-    "assetize": "./dist/index.js",
-    "assetize-cli": "./dist/main.js"
+    "assetize": "./dist/index.js"
   },
   "scripts": {
     "dev": "tsup src/** --watch",
