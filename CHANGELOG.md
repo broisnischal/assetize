@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.15
+
+### Patch Changes
+
+- de9f0b8: testing vesrion
+
 ## 0.0.14
 
 ### Patch Changes
