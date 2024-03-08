@@ -37,8 +37,6 @@ export function getPackageJSON(): PackageJSON | undefined {
 }
 
 export async function getCodebase(): Promise<Config["codebase"] | undefined> {
-  // const config = await getConfig();
-
   try {
     const packageJSON = getPackageJSON();
 
@@ -64,6 +62,8 @@ export async function getCodebase(): Promise<Config["codebase"] | undefined> {
         return "vue";
       } else if (buildScript.includes("astro")) {
         return "astro";
+      } else if (buildScript.includes("nuxt")) {
+        return "nuxt";
       } else {
         // console.log("No matched codebase found");
         return undefined;
@@ -137,17 +137,15 @@ export async function createAssetsDirectory(assetsDir = "./assets") {
   try {
     await fs.ensureDir(assetsDir);
 
+    //? TODO: create isssues to new directories
     const subDirectories = ["icons", "images", "fonts", "audios"];
     for (const subDir of subDirectories) {
       const dirPath = path.join(assetsDir, subDir);
       try {
         await fs.ensureDir(dirPath);
-        console.log(`Created directory '${dirPath}'.`);
       } catch (err: any) {
         if (err.code === "EEXIST") {
-          console.log(`Directory '${dirPath}' already exists.`);
           await mergeDirectories(dirPath, dirPath);
-          // console.log(`Merged files from '${dirPath}'.`);
         } else {
           throw err;
         }

@@ -2,17 +2,16 @@ import _ from "lodash";
 import fs from "node:fs";
 import path from "node:path";
 import prettier from "prettier";
-import { getConfig } from "../config";
+import { defaultConfigOptions, getConfig } from "../config";
 // import { getCodebase } from "../utils";
 import { logger } from "../utils/logger";
 
 export async function getFileContents() {
   const config = await getConfig();
 
-  const { codebase } = config;
-
-  const assetsDirectory = config.assets?.path;
-  const file = config.outputFile!;
+  const assetsDirectory =
+    config.assets?.path ?? defaultConfigOptions.assets.path;
+  const file = config.outputFile ?? defaultConfigOptions.outputFile;
 
   if (!fs.existsSync(assetsDirectory!)) {
     throw new Error(`Directory ${assetsDirectory} does not exist`);
@@ -35,7 +34,7 @@ export async function getFileContents() {
 
 export function createAssetItem() {
   return `
-  /// GENERATED CODE - DO NOT MODIFY BY HAND
+/// GENERATED CODE - DO NOT MODIFY BY HAND
 /// *****************************************************
 ///  Assetize Generator - DO NOT CHANGE
 /// *****************************************************
@@ -59,13 +58,28 @@ class AssetItem {
 }`;
 }
 
-export function createClassSvgGen() {
-  return `class AssetsSvgsGen {
+export async function createClassSvgGen() {
+  const config = await getConfig();
+
+  const mainRoute = path.join(
+    config.assets?.path ?? defaultConfigOptions.assets.path,
+    config.assets?.integrations?.icons?.path ??
+      defaultConfigOptions.assets.integrations.icons.path,
+  );
+
+  const files = fs.readdirSync(mainRoute, {
+    recursive: true,
+    withFileTypes: true,
+  });
+
+  console.log(files);
+
+  return `class AssetsIconsGen {
     constructor() {}
 
-    private static instance: AssetsSvgsGen;
+    private static instance: AssetsIconsGen;
 
-    /// FILEP path : assets/icons/Genetic.svg
+    /// FILE path : assets/icons/Genetic.svg
     static readonly Genetic: AssetItem = new AssetItem(
       "./assets/icons/Genetic.svg",
     );
@@ -121,7 +135,7 @@ export function createMainClassAndExport() {
   class MyAssets {
     private constructor() {}
 
-    static readonly icons = AssetsSvgsGen;
+    static readonly icons = AssetsIconsGen;
     static readonly images = AssetsImagesGen;
     static readonly fonts = AssetsFontsGen;
   }
@@ -135,13 +149,17 @@ export async function generateFile() {
     const config = await getConfig();
 
     const outputPath = path.join(
-      config.output ?? ".",
-      config.outputFile ?? "gen.assets.ts",
+      config.output ?? defaultConfigOptions.output,
+      config.outputFile ?? defaultConfigOptions.outputFile,
     );
+
+    // if (!fs.existsSync(outputPath)) {
+    //   fs.writeFileSync(outputPath, "");
+    // }
 
     const generatedCode = `
         ${createAssetItem()}
-        ${createClassSvgGen()}
+        ${await createClassSvgGen()}
         ${createClassImageGen()}
         ${createClassFontGen()}
         ${createMainClassAndExport()}

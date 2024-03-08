@@ -65,6 +65,7 @@ const configSchema = zod.object({
       "svelte",
       "vue",
       "astro",
+      "nuxt",
       "custom",
     ])
     .optional(),
@@ -114,21 +115,9 @@ export async function getConfig() {
   const configResult = await getExplorer().search();
 
   if (!configResult) {
-    // logger.error("Couldn't find assetize.config.ts or assetize.config.js");
-    // process.exit(1);
-
-    return {
-      output: "./src",
-      outputFile: "assetize.gen.ts",
-      lineLength: 80,
-      className: "MyAssets",
-      case: "camel",
-      assets: {
-        path: "assets",
-      },
-      codebase: "remix",
-      minifyAssets: true,
-    } satisfies Config;
+    logger.error("Couldn't find assetize.config.ts or assetize.config.js");
+    process.exit(1);
+    // return undefined;
   }
 
   try {
@@ -286,3 +275,30 @@ export function defineAssetizeConfig(options: Config) {
 }
 
 export type AssetizeConfig = ReturnType<typeof defineAssetizeConfig>;
+
+export const defaultConfigOptions = {
+  output: "./src",
+  outputFile: "assetize.gen.ts",
+  lineLength: 80,
+  className: "MyAssets",
+  case: "camel",
+  assets: {
+    path: "assets",
+    integrations: {
+      fonts: {
+        path: "fonts",
+      },
+      icons: {
+        path: "icons",
+      },
+      images: {
+        path: "images",
+      },
+      videos: {
+        path: "videos",
+      },
+    },
+  },
+  codebase: "remix",
+  minifyAssets: false,
+} satisfies Config;
