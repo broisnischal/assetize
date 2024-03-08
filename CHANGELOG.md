@@ -1,5 +1,12 @@
 # assetize
 
+## 0.0.19
+
+### Patch Changes
+
+- 6e51486: changes
+- 1984d27: new
+
 ## 0.0.17
 
 ### Patch Changes
