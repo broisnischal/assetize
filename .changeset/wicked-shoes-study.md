@@ -1,5 +1,0 @@
----
-"assetize": patch
----
-
-minor change

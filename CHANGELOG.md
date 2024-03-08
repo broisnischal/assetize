@@ -1,5 +1,11 @@
 # assetize
 
+## 0.0.23
+
+### Patch Changes
+
+- 179739b: minor change
+
 ## 0.0.22
 
 ### Patch Changes
