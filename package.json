@@ -1,7 +1,7 @@
 {
   "name": "assetize",
   "version": "2.1.5",
-  "description": "",
+  "description": "A versatile assets class builder for your project! fixes asset imports.",
   "private": false,
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -31,7 +31,23 @@
     "remix assets",
     "vite assets"
   ],
-  "author": "",
+  "author": "Nischal Dahal <neeswebservice@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/broisnees/assetize.git"
+  },
+  "homepage": "https://github.com/broisnees/assetize#readme",
+  "bugs": {
+    "url": "https://github.com/broisnees/assetize/issues"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/assetize"
+  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
