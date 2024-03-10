@@ -58,7 +58,7 @@ See [contributing guide](https://github.com/broisnischal/assetize/blob/master/CO
 // AssetsStyles
 // AssetsFonts -->
 
-## Pubic Requested Assets folder
+### Pubic Requested Assets folder
 
 - Currently
 
