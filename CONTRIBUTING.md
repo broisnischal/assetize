@@ -6,7 +6,7 @@ If you haven't already, please take a moment to read through the [code of conduc
 
 ## Testing
 
-We have a handful of unit tests via jest to ensure that our code is working as expected.
+We have a handful of unit tests via vitest to ensure that our code is working as expected.
 
 ## Issues
 
