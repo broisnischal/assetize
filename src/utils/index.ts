@@ -84,6 +84,8 @@ export async function getCodebase(): Promise<Config["codebase"] | undefined> {
         return "astro";
       } else if (buildScript.includes("nuxt")) {
         return "nuxt";
+      } else if (buildScript.includes("preact")) {
+        return "preact";
       } else {
         return "custom";
       }

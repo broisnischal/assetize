@@ -51,6 +51,9 @@ export async function generateConfigFile() {
           options: [
             { value: "remix", label: "Remix" },
             { value: "next", label: "Next" },
+            { value: "vite", label: "Vite" },
+            { value: "nuxt", label: "Nuxt" },
+            { value: "preact", label: "Preact" },
             { value: "react", label: "React" },
             { value: "svelte", label: "Svelte" },
             { value: "solid", label: "Solid" },

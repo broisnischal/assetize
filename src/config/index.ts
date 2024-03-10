@@ -64,6 +64,7 @@ const configSchema = zod.object({
       "react",
       "solid",
       "svelte",
+      "preact",
       "vue",
       "astro",
       "nuxt",
