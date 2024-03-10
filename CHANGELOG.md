@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.6
+
+### Patch Changes
+
+- 75864de: same name error fix
+
 ## 2.1.5
 
 ### Patch Changes
