@@ -14,3 +14,23 @@
 // AssetsVideos
 // AssetsStyles
 // AssetsFonts -->
+
+## About
+
+assetize is a cli tool that generates a file that helps you to access your project's assets in a convenient way.
+
+## Install
+
+```bash
+npm install assetize
+```
+
+## Usage
+
+```bash
+npx assetize generate
+```
+
+## License
+
+[MIT](https://github.com/assetize/assetize/blob/master/LICENSE)
