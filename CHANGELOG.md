@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.9
+
+### Patch Changes
+
+- 4f9b9c8: Version fix
+
 ## 2.1.8
 
 ### Patch Changes
