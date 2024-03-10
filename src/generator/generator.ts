@@ -90,7 +90,7 @@ export async function createClassRootAssetsDir() {
         });
 
         if (checkIfSameNameExists.length > 1) {
-          name = `${fileName}_${checkIfSameNameExists.length}`;
+          name = `${fileName}_${file.split(".")[1]}`;
         } else {
           name = fileName;
         }
