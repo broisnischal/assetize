@@ -1,4 +1,4 @@
-# [https://npmjs.com/package/assetize](assetize)
+# [assetize](https://npmjs.com/package/assetize)
 
 [![npm version](https://img.shields.io/npm/v/assetize.svg)](https://www.npmjs.com/package/assetize)
 [![npm downloads](https://img.shields.io/npm/dm/assetize.svg)](https://www.npmjs.com/package/assetize)
@@ -9,15 +9,17 @@
 
 ## Install
 
-```bash
-npm install assetize
-```
+### `npx assetize generate`
 
-## Usage
+Generates a default config file in your project's root directory.
 
-```bash
-npx assetize generate
-```
+### `npx assetize init`
+
+Interactively generates a config file.
+
+### `npx assetize build`
+
+Builds your assets according to your config file.
 
 ## License
 
