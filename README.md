@@ -35,7 +35,9 @@ npx assetize init
 
 ### Build
 
-### `npx assetize build`
+```sh
+npx assetize build
+```
 
 Builds your assets according to your config file.
 
