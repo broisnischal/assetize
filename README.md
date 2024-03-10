@@ -7,7 +7,13 @@
 
 <!-- [![GitHub release](https://img.shields.io/github/release/assetize/assetize.svg)](https://github.com/assetize/assetize/releases) -->
 
-## Install
+### Install
+
+```
+npm install assetize
+```
+
+@anthonyfu - use ni instead of package mangers, [ni](https://github.com/antfu/ni)
 
 ### `npx assetize generate`
 
