@@ -7,6 +7,7 @@ import { defaultConfigOptions, getConfig } from "../config";
 import { logger } from "../utils/logger";
 import { Config } from "../config";
 import { convertCase, generatePublicPath, normalizeString } from "../utils";
+import { AssetClassBuilder } from "./builder";
 
 export async function getFileContents() {
   const config = await getConfig();
@@ -44,10 +45,12 @@ export function createAssetItem() {
 class AssetItem {
   private _assetName: string;
   private _keyName: string;
+  private _ext: string;
 
   constructor(assetName: string) {
     this._assetName = assetName;
     this._keyName = assetName.split("/").pop()?.split(".")[0]! || assetName;
+    this._ext = assetName.split(".").pop()!;
   }
 
   get keyName() {
@@ -56,6 +59,10 @@ class AssetItem {
 
   get path() {
     return this._assetName;
+  }
+
+  get ext(){
+    return this._ext;
   }
 }`;
 }
@@ -67,65 +74,9 @@ export async function createClassRootAssetsDir() {
     config.assets?.path ?? defaultConfigOptions.assets.path,
   );
 
-  const files = fs.readdirSync(mainRoute).filter((file) => {
-    const filePath = path.join(mainRoute, file);
-    const stat = fs.statSync(filePath);
-    return stat.isFile();
-  });
+  const builder = new AssetClassBuilder("AssetRootGen", mainRoute, config);
 
-  const fileNames = new Set<{ name: string; file: string }>();
-
-  files.map((file) => {
-    const fileName = file.split(".")[0]!; // Extract the filename without extension
-
-    if (fileNames.has({ name: fileName, file })) {
-      console.log("double in files");
-      const name = `${fileName}_${file.split(".")[1]}`;
-      fileNames.add({ name, file });
-    } else {
-      fileNames.add({ name: fileName, file });
-    }
-  });
-
-  const uniqueFileNamesArray = [...fileNames];
-
-  return `class AssetsRootGen {
-    constructor() {}
-
-    private static instance: AssetsRootGen;
-
-    ${uniqueFileNamesArray
-      .map((item) => {
-        const joinedPath = path.join(mainRoute, item.file);
-
-        return `// ${item.name} - path : ${joinedPath}\nstatic readonly ${convertCase(item.name, config.case)}: AssetItem = new AssetItem(
-        "${generatePublicPath(joinedPath, config.codebase)}",
-      );`;
-      })
-      .join("\n")}
-
-    static get assets() {
-      return [${files
-        .map((file) => {
-          let name;
-
-          const fileName = file.split(".")[0]!;
-          const checkIfSameNameExists = files.filter((file) => {
-            const fileName = file.split(".")[0];
-            return fileName === fileName;
-          });
-
-          if (checkIfSameNameExists.length > 1) {
-            name = `${fileName}_${checkIfSameNameExists.length}`;
-          } else {
-            name = fileName;
-          }
-
-          return `this.${convertCase(name, config.case)}`;
-        })
-        .join(",")}];
-    }
-  }`;
+  return builder.generateClassCode();
 }
 
 export async function createClassIconsGen() {
@@ -137,37 +88,14 @@ export async function createClassIconsGen() {
       defaultConfigOptions.assets.integrations.icons.path,
   );
 
-  const files = fs.readdirSync(mainRoute, {
-    recursive: true,
-    withFileTypes: true,
-  });
+  const builder = new AssetClassBuilder(
+    "AssetsIconsGen",
+    mainRoute,
+    config,
+    "icons",
+  );
 
-  return `class AssetsIconsGen {
-    constructor() {}
-
-    private static instance: AssetsIconsGen;
-
-    ${files
-      .map((file) => {
-        const fileName = file.name.split(".")[0]!;
-
-        const joinedPath = path.join(mainRoute, file.name);
-
-        return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
-        "${generatePublicPath(joinedPath, config.codebase)}",
-      );`;
-      })
-      .join("\n")}
-
-    static get icons() {
-      return [${files
-        .map((file) => {
-          const fileName = file.name.split(".")[0]!;
-          return `this.${convertCase(fileName, config.case)}`;
-        })
-        .join(",")}];
-    }
-  }`;
+  return builder.generateClassCode();
 }
 
 export async function createClassImageGen() {
@@ -179,38 +107,14 @@ export async function createClassImageGen() {
       defaultConfigOptions.assets.integrations.images.path,
   );
 
-  const files = fs.readdirSync(mainRoute, {
-    recursive: true,
-    withFileTypes: true,
-  });
+  const builder = new AssetClassBuilder(
+    "AssetsImagesGen",
+    mainRoute,
+    config,
+    "images",
+  );
 
-  return `class AssetsImagesGen {
-    constructor() {}
-
-    private static instance: AssetsImagesGen;
-
-    ${files
-      .map((file) => {
-        const fileName = file.name.split(".")[0]!;
-
-        const joinedPath = path.join(mainRoute, file.name);
-
-        return `static readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
-        "${generatePublicPath(joinedPath, config.codebase)}",
-      );`;
-      })
-      .join("\n")}
-
-      static get images() {
-        return [${files
-          .map((file) => {
-            const fileName = file.name.split(".")[0]!;
-            return `this.${convertCase(fileName, config.case)}`;
-          })
-          .join(",")}];
-        }
-
-  }`;
+  return builder.generateClassCode();
 }
 
 export async function createClassFontGen() {
@@ -222,39 +126,14 @@ export async function createClassFontGen() {
       defaultConfigOptions.assets.integrations.fonts?.path,
   );
 
-  const files = fs.readdirSync(mainRoute, {
-    recursive: true,
-    withFileTypes: true,
-  });
+  const builder = new AssetClassBuilder(
+    "AssetsFontsGen",
+    mainRoute,
+    config,
+    "fonts",
+  );
 
-  return `
-  class AssetsFontsGen {
-    constructor() {}
-
-    private static instance: AssetsFontsGen;
-
-    ${files
-      .map((file) => {
-        const fileName = file.name.split(".")[0]!;
-
-        const joinedPath = path.join(mainRoute, file.name);
-
-        return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
-        "${generatePublicPath(joinedPath, config.codebase)}",
-      );`;
-      })
-      .join("\n")}
-
-      static get fonts() {
-        return [${files
-          .map((file) => {
-            const fileName = file.name.split(".")[0]!;
-            return `this.${convertCase(fileName, config.case)}`;
-          })
-          .join(",")}];
-        }
-  }
-  `;
+  return builder.generateClassCode();
 }
 
 export async function createMainClassAndExport() {
@@ -266,7 +145,7 @@ export async function createMainClassAndExport() {
 
     // private static instance: ${config.className ?? defaultConfigOptions.className};
 
-    static readonly ${convertCase("root", config.case)} = AssetsRootGen;
+    static readonly ${convertCase("root", config.case)} = AssetRootGen;
     static readonly ${convertCase("icons", config.case)} = AssetsIconsGen;
     static readonly ${convertCase("images", config.case)} = AssetsImagesGen;
     static readonly ${convertCase("fonts", config.case)} = AssetsFontsGen;

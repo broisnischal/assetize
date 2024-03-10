@@ -1,22 +1,26 @@
 import { Command } from "commander";
-import { logger } from "../utils/logger";
+import { logger } from "./src/utils/logger";
 import {
   addScriptToPackageJSON,
   convertCase,
   createAssetsDirectory,
   generatePublicPath,
-} from "../utils";
+} from "./src/utils";
 import path from "path";
 import fs from "fs-extra";
-import { Config, defaultConfigOptions, getConfig } from "../config";
+import { Config, defaultConfigOptions, getConfig } from "./src/config";
+import { AssetClassBuilder } from "./src/generator/builder";
 
 export const test = new Command()
   .name("test")
   .description("initialize your project and choose libraries")
   .action(async () => {
     const config = await getConfig();
+
     const mainRoute = path.join(
       config.assets?.path ?? defaultConfigOptions.assets.path,
+      config.assets?.integrations?.icons?.path ??
+        defaultConfigOptions.assets.integrations.icons.path,
     );
 
     // const files = fs.readdirSync(mainRoute).filter((file) => {
@@ -59,7 +63,7 @@ export const test = new Command()
     // }
 
     const builder = new AssetClassBuilder(
-      "AssetRoot",
+      "AssetsIconsGen",
       mainRoute,
       config,
       "icons",
