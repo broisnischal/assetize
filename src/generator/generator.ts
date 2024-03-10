@@ -67,18 +67,17 @@ export async function createClassRootAssetsDir() {
     config.assets?.path ?? defaultConfigOptions.assets.path,
   );
 
-  const files = fs.readdirSync(mainRoute, {
-    recursive: true,
-    withFileTypes: true,
-  });
+  const files = fs
+    .readdirSync(mainRoute, {
+      recursive: true,
+      withFileTypes: true,
+    })
+    .filter((file) => file.isFile());
 
-  return `class ${convertCase(mainRoute.split("/").pop() ?? "AssetsRoot", config.case)} {
+  return `class AssetsRoot {
     constructor() {}
 
-    private static instance: ${convertCase(
-      mainRoute.split("/").pop() ?? "AssetsRoot",
-      config.case,
-    )};
+    private static instance: AssetsRoot;
 
     ${files
       .map((file) => {
@@ -239,6 +238,9 @@ export async function createMainClassAndExport() {
   class ${config.className ?? defaultConfigOptions.className} {
     private constructor() {}
 
+    // private static instance: ${config.className ?? defaultConfigOptions.className};
+
+    static readonly ${convertCase("root", config.case)} = AssetsRootGen;
     static readonly ${convertCase("icons", config.case)} = AssetsIconsGen;
     static readonly ${convertCase("images", config.case)} = AssetsImagesGen;
     static readonly ${convertCase("fonts", config.case)} = AssetsFontsGen;

@@ -41,14 +41,6 @@ npx assetize build
 
 Builds your assets according to your config file.
 
-## License
-
-[MIT](https://github.com/broisnischal/assetize/blob/master/LICENSE)
-
-## Contributing
-
-See [contributing guide](https://github.com/broisnischal/assetize/blob/master/CONTRIBUTING.md)
-
 ## Issues
 
 Submit your issues to the [assetize](https://github.com/broisnischal/assetize/issues) repository. 🤖
@@ -79,4 +71,12 @@ Submit your issues to the [assetize](https://github.com/broisnischal/assetize/is
 - Todo add here
   - upcoming
 
-Star me on [GitHub](https://github.com/broisnischal/assetize) 🌟
+## License
+
+[MIT](https://github.com/broisnischal/assetize/blob/master/LICENSE)
+
+## Contributing
+
+See [contributing guide](https://github.com/broisnischal/assetize/blob/master/CONTRIBUTING.md)
+
+## Star me on [GitHub](https://github.com/broisnischal/assetize) 🌟

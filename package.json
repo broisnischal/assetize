@@ -19,7 +19,18 @@
     "setup": "chmod +x ./dist/main.js",
     "release": "pnpm run lint && pnpm run test && pnpm run build && changeset publish"
   },
-  "keywords": [],
+  "keywords": [
+    "assetize",
+    "assets",
+    "build",
+    "bundle",
+    "boilerplate",
+    "boilerplates",
+    "generate assets",
+    "next assets",
+    "remix assets",
+    "vite assets"
+  ],
   "author": "",
   "license": "MIT",
   "publishConfig": {
