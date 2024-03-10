@@ -31,13 +31,6 @@ export default function Home() {
 }
 ```
 
-## Features
-
-- **Streamlined Asset Imports:** With Assetify, you can import assets effortlessly using simple, clean syntax.
-- **Customizable Asset Classes:** Tailor asset classes to suit your project's needs, ensuring consistency and organization.
-- **Support for Various File Types:** Whether it's icons, images, fonts, or more, Assetify has you covered.
-- **Easy Integration:** Integrate Assetify seamlessly into your project, enhancing productivity from the get-go.
-
 ### Install
 
 ```
