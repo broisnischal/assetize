@@ -11,7 +11,15 @@
 
 ### `npx assetize generate`
 
-Generates a default config file in your project's root directory.
+Generates a default config file in your project's root directory. you can generate yourself by importing `defineAssetizeConfig` from `assetize` and passing it your config.
+
+```ts
+import { defineAssetizeConfig } from "assetize";
+
+export default defineAssetizeConfig({
+  codebase: "remix",
+});
+```
 
 ### `npx assetize init`
 
