@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.3
+
+### Patch Changes
+
+- 7329161: Created the readme, updated the codebase, added the feature to directly build the main files from the root asset directory and more!
+
 ## 2.1.2
 
 ### Patch Changes
