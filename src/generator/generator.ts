@@ -74,10 +74,10 @@ export async function createClassRootAssetsDir() {
     })
     .filter((file) => file.isFile());
 
-  return `class AssetsRoot {
+  return `class AssetsRootGen {
     constructor() {}
 
-    private static instance: AssetsRoot;
+    private static instance: AssetsRootGen;
 
     ${files
       .map((file) => {
@@ -249,6 +249,11 @@ export async function createMainClassAndExport() {
   export default ${config.className ?? defaultConfigOptions.className};
   `;
 }
+
+// ${convertCase(
+//   mainRoute.split("/").pop() ?? "AssetsRoot",
+//   config.case,
+// )};
 
 export async function generateFile() {
   try {
