@@ -9,7 +9,36 @@
 
 A versatile assets class builder for your project!
 
-A assets class builder for your project! Say goodbye to manual asset imports like 'public/icons/myicon.ico' – let Assetify handle it for you! 🚀, with this `MyAssets.icons.myicon` import
+#### Introduction
+
+Tired of manually importing assets like `public/icons/myicon.ico` in your project? Say goodbye to the hassle with Assetify! This handy tool automates asset imports, making your workflow smoother and more efficient.
+
+## Example
+
+```tsx
+// Import Assetify
+import MyAssets from "./assetize.gen";
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <Image
+        src={MyAssets.icons.vercel.path} // Access assets
+        alt="Vercel Logo"
+        width={202}
+        height={206}
+      />
+    </main>
+  );
+}
+```
+
+## Features
+
+- **Streamlined Asset Imports:** With Assetify, you can import assets effortlessly using simple, clean syntax.
+- **Customizable Asset Classes:** Tailor asset classes to suit your project's needs, ensuring consistency and organization.
+- **Support for Various File Types:** Whether it's icons, images, fonts, or more, Assetify has you covered.
+- **Easy Integration:** Integrate Assetify seamlessly into your project, enhancing productivity from the get-go.
 
 ### Install
 
