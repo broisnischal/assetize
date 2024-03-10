@@ -103,4 +103,6 @@ Submit your issues to the [assetize](https://github.com/broisnischal/assetize/is
 
 See [contributing guide](https://github.com/broisnischal/assetize/blob/master/CONTRIBUTING.md)
 
+![Assetify logo](./assetize.png)
+
 ## Star me on [GitHub](https://github.com/broisnischal/assetize) 🌟

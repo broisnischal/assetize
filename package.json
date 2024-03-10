@@ -34,11 +34,11 @@
   "author": "Nischal Dahal <neeswebservice@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/broisnees/assetize.git"
+    "url": "https://github.com/broisnischal/assetize.git"
   },
-  "homepage": "https://github.com/broisnees/assetize#readme",
+  "homepage": "https://github.com/broisnischal/assetize#readme",
   "bugs": {
-    "url": "https://github.com/broisnees/assetize/issues"
+    "url": "https://github.com/broisnischal/assetize/issues"
   },
   "funding": {
     "type": "opencollective",
