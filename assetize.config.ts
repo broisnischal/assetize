@@ -1,4 +1,4 @@
-import { defineAssetizeConfig } from "assetize";
+import { defineAssetizeConfig } from "./src";
 
 export default defineAssetizeConfig({
   lineLength: 80,

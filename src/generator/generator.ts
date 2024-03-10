@@ -60,6 +60,49 @@ class AssetItem {
 }`;
 }
 
+export async function createClassRootAssetsDir() {
+  const config = await getConfig();
+
+  const mainRoute = path.join(
+    config.assets?.path ?? defaultConfigOptions.assets.path,
+  );
+
+  const files = fs.readdirSync(mainRoute, {
+    recursive: true,
+    withFileTypes: true,
+  });
+
+  return `class ${convertCase(mainRoute.split("/").pop() ?? "AssetsRoot", config.case)} {
+    constructor() {}
+
+    private static instance: ${convertCase(
+      mainRoute.split("/").pop() ?? "AssetsRoot",
+      config.case,
+    )};
+
+    ${files
+      .map((file) => {
+        const fileName = file.name.split(".")[0]!;
+
+        const joinedPath = path.join(mainRoute, file.name);
+
+        return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
+        "${generatePublicPath(joinedPath, config.codebase)}",
+      );`;
+      })
+      .join("\n")}
+
+    static get assets() {
+      return [${files
+        .map((file) => {
+          const fileName = file.name.split(".")[0]!;
+          return `this.${convertCase(fileName, config.case)}`;
+        })
+        .join(",")}];
+    }
+  }`;
+}
+
 export async function createClassIconsGen() {
   const config = await getConfig();
 
@@ -220,6 +263,7 @@ export async function generateFile() {
 
     const generatedCode = `
         ${createAssetItem()}
+        ${await createClassRootAssetsDir()}
         ${await createClassIconsGen()}
         ${await createClassImageGen()}
         ${await createClassFontGen()}
