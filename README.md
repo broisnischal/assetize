@@ -11,7 +11,7 @@
 
 ### `npx assetize generate`
 
-Generates a default config file in your project's root directory. you can generate yourself by importing `defineAssetizeConfig` from `assetize` and passing it your config.
+Generates a default config file in your project's root directory. you can generate yourself by importing `defineAssetizeConfig` from `assetize` and passing it your config. Config file name must be `assetize.config.{js,ts,mts,mjs}`.
 
 ```ts
 import { defineAssetizeConfig } from "assetize";
@@ -21,9 +21,13 @@ export default defineAssetizeConfig({
 });
 ```
 
-### `npx assetize init`
+### It will create the assets directory in your project's root directory.
 
-Interactively generates a config file.
+```bash
+npx assetize init
+```
+
+### Build
 
 ### `npx assetize build`
 
