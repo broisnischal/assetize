@@ -39,3 +39,18 @@ See [contributing guide](https://github.com/broisnischal/assetize/blob/master/CO
 // AssetsVideos
 // AssetsStyles
 // AssetsFonts -->
+
+## Support
+
+- [x] Remix
+- [x] Next JS
+- [x] Svelte
+- [ ] Vue
+- [x] Vite
+- [x] Nuxt
+- [x] Astro
+- [ ] Solid
+- [x] Preact
+- [ ] Solid
+
+Star me on [GitHub](https://github.com/broisnischal/assetize) 🌟
