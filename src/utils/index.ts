@@ -400,3 +400,7 @@ export function generatePublicPath(
       return joinedPath;
   }
 }
+
+export function normalizeStringSameName(str: string): string {
+  return str.replace(/[^\w]/g, "_"); // Replace non-word characters with underscore
+}

@@ -67,12 +67,11 @@ export async function createClassRootAssetsDir() {
     config.assets?.path ?? defaultConfigOptions.assets.path,
   );
 
-  const files = fs
-    .readdirSync(mainRoute, {
-      recursive: true,
-      withFileTypes: true,
-    })
-    .filter((file) => file.isFile());
+  const files = fs.readdirSync(mainRoute).filter((file) => {
+    const filePath = path.join(mainRoute, file);
+    const stat = fs.statSync(filePath);
+    return stat.isFile();
+  });
 
   return `class AssetsRootGen {
     constructor() {}
@@ -81,11 +80,12 @@ export async function createClassRootAssetsDir() {
 
     ${files
       .map((file) => {
-        const fileName = file.name.split(".")[0]!;
+        const fileName = file;
+        const identifier = normalizeString(fileName);
 
-        const joinedPath = path.join(mainRoute, file.name);
+        const joinedPath = path.join(mainRoute, file);
 
-        return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(fileName, config.case)}: AssetItem = new AssetItem(
+        return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(identifier!, config.case)}: AssetItem = new AssetItem(
         "${generatePublicPath(joinedPath, config.codebase)}",
       );`;
       })
@@ -94,7 +94,7 @@ export async function createClassRootAssetsDir() {
     static get assets() {
       return [${files
         .map((file) => {
-          const fileName = file.name.split(".")[0]!;
+          const fileName = file.split(".")[0]!;
           return `this.${convertCase(fileName, config.case)}`;
         })
         .join(",")}];
