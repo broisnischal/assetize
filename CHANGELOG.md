@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.8
+
+### Patch Changes
+
+- f2c5951: minor changes
+
 ## 2.1.7
 
 ### Patch Changes
