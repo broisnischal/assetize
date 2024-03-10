@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.5
+
+### Patch Changes
+
+- fa5d771: chore fix bug
+
 ## 2.1.4
 
 ### Patch Changes
