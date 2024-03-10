@@ -40,10 +40,6 @@
   "bugs": {
     "url": "https://github.com/broisnees/assetize/issues"
   },
-  "sideEffects": false,
-  "engines": {
-    "node": ">=16.0.0"
-  },
   "funding": {
     "type": "opencollective",
     "url": "https://opencollective.com/assetize"
