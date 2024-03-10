@@ -46,11 +46,13 @@ class AssetItem {
   private _assetName: string;
   private _keyName: string;
   private _ext: string;
+  private _altText: string;
 
   constructor(assetName: string) {
     this._assetName = assetName;
     this._keyName = assetName.split("/").pop()?.split(".")[0]! || assetName;
     this._ext = assetName.split(".").pop()!;
+    this._altText = this._keyName + " " + " image";
   }
 
   get keyName() {
@@ -63,6 +65,10 @@ class AssetItem {
 
   get ext(){
     return this._ext;
+  }
+
+  get altText() {
+    return this._altText;
   }
 }`;
 }
