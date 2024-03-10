@@ -6,7 +6,6 @@ import { build } from "./commands/build";
 import { generate } from "./commands/generate";
 import { init } from "./commands/init";
 import { Config } from "./config";
-import { test } from "../test";
 
 process.on("SIGINT", () => process.exit(0));
 process.on("SIGTERM", () => process.exit(0));
@@ -39,11 +38,7 @@ const program = new Command()
   .description("generates the assets class file for your project")
   .version(packageJSON.version, "-v, --version", "display the version number");
 
-program
-  .addCommand(generate)
-  .addCommand(build)
-  .addCommand(init)
-  .addCommand(test);
+program.addCommand(generate).addCommand(build).addCommand(init);
 
 program.parse();
 
