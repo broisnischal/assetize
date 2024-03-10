@@ -58,6 +58,19 @@ See [contributing guide](https://github.com/broisnischal/assetize/blob/master/CO
 // AssetsStyles
 // AssetsFonts -->
 
+## Pubic Requested Assets folder
+
+- Currently
+
+  - icons
+  - images
+  - videos
+  - svgs
+  - fonts
+
+- Todo add here
+  - upcoming
+
 ## Support
 
 - [x] Remix
