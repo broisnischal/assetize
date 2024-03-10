@@ -73,31 +73,32 @@ export async function createClassRootAssetsDir() {
     return stat.isFile();
   });
 
+  const fileNames = new Set<{ name: string; file: string }>();
+
+  files.map((file) => {
+    const fileName = file.split(".")[0]!; // Extract the filename without extension
+
+    if (fileNames.has({ name: fileName, file })) {
+      console.log("double in files");
+      const name = `${fileName}_${file.split(".")[1]}`;
+      fileNames.add({ name, file });
+    } else {
+      fileNames.add({ name: fileName, file });
+    }
+  });
+
+  const uniqueFileNamesArray = [...fileNames];
+
   return `class AssetsRootGen {
     constructor() {}
 
     private static instance: AssetsRootGen;
 
-    ${files
-      .map((file) => {
-        let name;
+    ${uniqueFileNamesArray
+      .map((item) => {
+        const joinedPath = path.join(mainRoute, item.file);
 
-        const fileName = file.split(".")[0]; // Extract the filename without extension
-
-        const checkIfSameNameExists = files.filter((file) => {
-          const fileName = file.split(".")[0];
-          return fileName === fileName;
-        });
-
-        if (checkIfSameNameExists.length > 1) {
-          name = `${fileName}_${file.split(".")[1]}`;
-        } else {
-          name = fileName;
-        }
-
-        const joinedPath = path.join(mainRoute, file);
-
-        return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(name!, config.case)}: AssetItem = new AssetItem(
+        return `// ${item.name} - path : ${joinedPath}\nstatic readonly ${convertCase(item.name, config.case)}: AssetItem = new AssetItem(
         "${generatePublicPath(joinedPath, config.codebase)}",
       );`;
       })
