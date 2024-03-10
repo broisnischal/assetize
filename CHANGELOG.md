@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.11
+
+### Patch Changes
+
+- 82d6eff: removed file
+
 ## 2.1.10
 
 ### Patch Changes
