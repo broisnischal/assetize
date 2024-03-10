@@ -53,13 +53,6 @@ See [contributing guide](https://github.com/broisnischal/assetize/blob/master/CO
 
 Submit your issues to the [assetize](https://github.com/broisnischal/assetize/issues) repository. 🤖
 
-<!-- // AssetsImage
-// AssetsIcons
-// AssetsAudios
-// AssetsVideos
-// AssetsStyles
-// AssetsFonts -->
-
 ### Pubic Requested Assets folder
 
 - Currently

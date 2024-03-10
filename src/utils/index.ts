@@ -70,6 +70,8 @@ export async function getCodebase(): Promise<Config["codebase"] | undefined> {
         return "react";
       } else if (buildScript.includes("remix")) {
         return "remix";
+      } else if (buildScript.includes("vite")) {
+        return "vite";
       } else if (buildScript.includes("next")) {
         return "next";
       } else if (buildScript.includes("solid")) {
@@ -83,8 +85,7 @@ export async function getCodebase(): Promise<Config["codebase"] | undefined> {
       } else if (buildScript.includes("nuxt")) {
         return "nuxt";
       } else {
-        // console.log("No matched codebase found");
-        return undefined;
+        return "custom";
       }
     }
   } catch (error) {
