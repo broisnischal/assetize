@@ -80,12 +80,24 @@ export async function createClassRootAssetsDir() {
 
     ${files
       .map((file) => {
-        const fileName = file;
-        const identifier = normalizeString(fileName);
+        let name;
+
+        const fileName = file.split(".")[0]; // Extract the filename without extension
+
+        const checkIfSameNameExists = files.filter((file) => {
+          const fileName = file.split(".")[0];
+          return fileName === fileName;
+        });
+
+        if (checkIfSameNameExists.length > 1) {
+          name = `${fileName}_${checkIfSameNameExists.length}`;
+        } else {
+          name = fileName;
+        }
 
         const joinedPath = path.join(mainRoute, file);
 
-        return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(identifier!, config.case)}: AssetItem = new AssetItem(
+        return `// ${fileName} - path : ${joinedPath}\nstatic readonly ${convertCase(name!, config.case)}: AssetItem = new AssetItem(
         "${generatePublicPath(joinedPath, config.codebase)}",
       );`;
       })
@@ -94,8 +106,21 @@ export async function createClassRootAssetsDir() {
     static get assets() {
       return [${files
         .map((file) => {
+          let name;
+
           const fileName = file.split(".")[0]!;
-          return `this.${convertCase(fileName, config.case)}`;
+          const checkIfSameNameExists = files.filter((file) => {
+            const fileName = file.split(".")[0];
+            return fileName === fileName;
+          });
+
+          if (checkIfSameNameExists.length > 1) {
+            name = `${fileName}_${checkIfSameNameExists.length}`;
+          } else {
+            name = fileName;
+          }
+
+          return `this.${convertCase(name, config.case)}`;
         })
         .join(",")}];
     }

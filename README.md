@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/assetize.svg)](https://www.npmjs.com/package/assetize)
 [![npm downloads](https://img.shields.io/npm/dm/assetize.svg)](https://www.npmjs.com/package/assetize)
 [![npm license](https://img.shields.io/npm/l/assetize.svg)](https://www.npmjs.com/package/assetize)
-[![Open in GitHub Pages](https://img.shields.io/static/v1?label=GitHub&message=assetize&color=blue&style=flat-square)](https://assetize.netlify.app)
+[![Open in GitHub Pages](https://img.shields.io/static/v1?label=GitHub&message=assetize&color=blue&style=flat-square)](https://github.com/broisnischal/assetize)
 
 <!-- [![GitHub release](https://img.shields.io/github/release/assetize/assetize.svg)](https://github.com/assetize/assetize/releases) -->
 
