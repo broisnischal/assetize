@@ -43,7 +43,7 @@ Builds your assets according to your config file.
 
 ## License
 
-[ISC](https://github.com/broisnischal/assetize/blob/master/LICENSE)
+[MIT](https://github.com/broisnischal/assetize/blob/master/LICENSE)
 
 ## Contributing
 
