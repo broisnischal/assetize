@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.10
+
+### Patch Changes
+
+- 2f9d505: minor fix
+
 ## 2.1.9
 
 ### Patch Changes
