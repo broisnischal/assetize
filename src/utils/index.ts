@@ -371,29 +371,27 @@ export function generatePublicPath(
     return "";
   }
 
-  const basename = path.parse(joinedPath).base;
-  const base = path.parse(joinedPath).dir;
-  const lastPart = path.parse(base).base;
-
   switch (codebase) {
     case "remix":
-      return `/${lastPart}/${basename}`;
+      return `/${removeFirstPath(joinedPath)}`;
     case "react":
       return `./${joinedPath}`;
     case "vite":
-      return `/${lastPart}/${basename}`;
+      // return `/${lastPart}/${basename}`;
+      return `/${removeFirstPath(joinedPath)}`;
     case "next":
-      return `/${lastPart}/${basename}`;
+      return `/${removeFirstPath(joinedPath)}`;
     case "vue":
-      return `/${lastPart}/${basename}`;
+      return `/${removeFirstPath(joinedPath)}`;
+
     case "svelte":
       return joinedPath; // TODO
     case "solid":
       return joinedPath; // TODO
     case "astro":
-      return `/${lastPart}/${basename}`;
+      return `/${removeFirstPath(joinedPath)}`;
     case "nuxt":
-      return `/${lastPart}/${basename}`;
+      return `/${removeFirstPath(joinedPath)}`;
     case "custom":
       return `./${joinedPath}`;
     default:
@@ -403,4 +401,10 @@ export function generatePublicPath(
 
 export function normalizeStringSameName(str: string): string {
   return str.replace(/[^\w]/g, "_"); // Replace non-word characters with underscore
+}
+
+export function removeFirstPath(filePath: string): string {
+  const parts = filePath.split("/");
+  parts.shift();
+  return parts.join("/");
 }

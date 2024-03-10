@@ -6,6 +6,7 @@ import { build } from "./commands/build";
 import { generate } from "./commands/generate";
 import { init } from "./commands/init";
 import { Config } from "./config";
+// import { test } from "./commands/test";
 
 process.on("SIGINT", () => process.exit(0));
 process.on("SIGTERM", () => process.exit(0));

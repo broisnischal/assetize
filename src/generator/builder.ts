@@ -69,24 +69,32 @@ export class AssetClassBuilder {
         .join("\n")}
 
       static get ${this.staticget}() {
-        return [${this.files
-          .map((file) => {
-            let name;
-            const fileName = file.split(".")[0];
-            const checkIfSameNameExists = this.files.filter(
-              (f) => f.split(".")[0] === fileName,
-            );
-            if (checkIfSameNameExists.length > 1) {
-              name = `${fileName}_${file.split(".")[1]}`;
-            } else {
-              name = fileName;
-            }
-            return `this.${convertCase(name!, this.config.case)}`;
-          })
-          .join(",")}];
+        return [
+          ${uniqueFileNamesArray
+            .map((item) => {
+              return `this.${convertCase(item.name, this.config.case)}`;
+            })
+            .join(",")}
+        ];
       }
     }`;
 
     return classDefinition;
   }
 }
+
+// ${this.files
+//   .map((file) => {
+//     let name;
+//     const fileName = file.split(".")[0];
+//     const checkIfSameNameExists = this.files.filter(
+//       (f) => f.split(".")[0] === fileName,
+//     );
+//     if (checkIfSameNameExists.length > 1) {
+//       name = `${fileName}_${file.split(".")[1]}`;
+//     } else {
+//       name = fileName;
+//     }
+//     return `this.${convertCase(name!, this.config.case)}`;
+//   })
+//   .join(",")}
