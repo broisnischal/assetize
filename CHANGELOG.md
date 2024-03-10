@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.4
+
+### Patch Changes
+
+- 78273df: assets root gen
+
 ## 2.1.3
 
 ### Patch Changes
