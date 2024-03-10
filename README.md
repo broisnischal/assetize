@@ -53,19 +53,6 @@ See [contributing guide](https://github.com/broisnischal/assetize/blob/master/CO
 
 Submit your issues to the [assetize](https://github.com/broisnischal/assetize/issues) repository. 🤖
 
-### Pubic Requested Assets folder
-
-- Currently
-
-  - icons
-  - images
-  - videos
-  - svgs
-  - fonts
-
-- Todo add here
-  - upcoming
-
 ## Support
 
 - [x] Remix
@@ -78,5 +65,18 @@ Submit your issues to the [assetize](https://github.com/broisnischal/assetize/is
 - [ ] Solid
 - [x] Preact
 - [ ] Solid
+
+### Pubic Requested Assets folder
+
+- Currently
+
+  - icons
+  - images
+  - videos
+  - svgs
+  - fonts
+
+- Todo add here
+  - upcoming
 
 Star me on [GitHub](https://github.com/broisnischal/assetize) 🌟
