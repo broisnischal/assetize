@@ -49,7 +49,7 @@ See [contributing guide](https://github.com/broisnischal/assetize/blob/master/CO
 
 ## Issues
 
-[assetize](https://github.com/broisnischal/assetize/issues)
+Submit your issues to the [assetize](https://github.com/broisnischal/assetize/issues) repository. 🤖
 
 <!-- // AssetsImage
 // AssetsIcons
