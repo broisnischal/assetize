@@ -1,5 +1,12 @@
 # assetize
 
+## 2.1.13
+
+### Patch Changes
+
+- 7d136ef: Added support to JavaScript Files!
+- a609900: fix file import
+
 ## 2.1.12
 
 ### Patch Changes
