@@ -39,7 +39,7 @@ export default function Home() {
 npm install assetize
 ```
 
-@anthonyfu - use ni instead of package mangers, [ni](https://github.com/antfu/ni)
+@antfu - use ni instead of package mangers, [ni](https://github.com/antfu/ni)
 
 ### `npx assetize generate`
 
