@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.14
+
+### Patch Changes
+
+- aaddac4: fixes
+
 ## 2.1.13
 
 ### Patch Changes
