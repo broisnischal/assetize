@@ -13,6 +13,8 @@ A versatile assets class builder for your project!
 
 Tired of manually importing assets like `public/icons/myicon.ico` in your project? Say goodbye to the hassle with Assetify! This handy tool automates asset imports, making your workflow smoother and more efficient.
 
+To generate the assets file, you need to run the `assetize:build` command. Remember to do this each time you make changes to files in the root assets folder.
+
 ## Example
 
 ```tsx
