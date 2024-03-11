@@ -10,17 +10,20 @@ export class AssetClassBuilder {
   // private assets: { name: string; file: string }[];
   private staticget: string;
   private files: string[];
+  private outputFileType: "ts" | "js";
 
   constructor(
     className: string,
     mainRoute: string,
     config: any,
     staticget = "assets",
+    outputFileType: "ts" | "js" = "ts",
   ) {
     this.className = className;
     this.mainRoute = mainRoute;
     this.config = config;
     this.staticget = convertCase(staticget, config.case);
+    this.outputFileType = outputFileType;
     this.files = fs.readdirSync(mainRoute).filter((file) => {
       const filePath = path.join(mainRoute, file);
       const stat = fs.statSync(filePath);
@@ -50,7 +53,39 @@ export class AssetClassBuilder {
   public generateClassCode() {
     const uniqueFileNamesArray = this.getUniqueFileNamesArray();
 
-    const classDefinition = `class ${this.className} {
+    if (this.outputFileType === "js") {
+      const classDefinition = `class ${this.className} {
+        constructor() {}
+
+        static instance;
+
+        ${uniqueFileNamesArray
+          .map((item) => {
+            const joinedPath = path.join(this.mainRoute, item.file);
+            return `// ${item.name} - path : ${joinedPath}\nstatic ${convertCase(
+              item.name,
+              this.config.case,
+            )} = new AssetItem("${generatePublicPath(
+              joinedPath,
+              this.config.codebase,
+            )}");`;
+          })
+          .join("\n")}
+
+        static get ${this.staticget}() {
+          return [
+            ${uniqueFileNamesArray
+              .map((item) => {
+                return `this.${convertCase(item.name, this.config.case)}`;
+              })
+              .join(",")}
+          ];
+        }
+      }`;
+
+      return classDefinition;
+    } else if (this.outputFileType === "ts") {
+      const classDefinition = `class ${this.className} {
       constructor() {}
 
       private static instance: ${this.className};
@@ -79,7 +114,10 @@ export class AssetClassBuilder {
       }
     }`;
 
-    return classDefinition;
+      return classDefinition;
+    } else {
+      throw new Error(`Invalid output file type: ${this.outputFileType}`);
+    }
   }
 }
 

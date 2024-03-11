@@ -382,23 +382,23 @@ export function generatePublicPath(
 
   switch (codebase) {
     case "remix":
-      return `/${lastPart}/${base}`;
+      return `${lastPart}/${base}`;
     case "react":
       return `./${joinedPath}`;
     case "vite":
-      return `/${lastPart}/${base}`;
+      return `${lastPart}/${base}`;
     case "next":
-      return `/${lastPart}/${base}`;
+      return `${lastPart}/${base}`;
     case "vue":
-      return `/${lastPart}/${base}`;
+      return `${lastPart}/${base}`;
     case "svelte":
       return joinedPath; // TODO
     case "solid":
       return joinedPath; // TODO
     case "astro":
-      return `/${lastPart}/${base}`;
+      return `${lastPart}/${base}`;
     case "nuxt":
-      return `/${lastPart}/${base}`;
+      return `${lastPart}/${base}`;
     case "custom":
       return `./${joinedPath}`;
     default:
