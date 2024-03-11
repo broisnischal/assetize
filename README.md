@@ -1,4 +1,4 @@
-# [Assetify 🎨](https://npmjs.com/package/assetize)
+# [Assetize 🎨](https://npmjs.com/package/assetize)
 
 [![npm version](https://img.shields.io/npm/v/assetize.svg)](https://www.npmjs.com/package/assetize)
 [![npm downloads](https://img.shields.io/npm/dm/assetize.svg)](https://www.npmjs.com/package/assetize)
@@ -7,13 +7,11 @@
 
 <!-- [![GitHub release](https://img.shields.io/github/release/assetize/assetize.svg)](https://github.com/assetize/assetize/releases) -->
 
-A versatile assets class builder for your project!
-
 #### Introduction
 
-Tired of manually importing assets like `public/icons/myicon.ico` in your project? Say goodbye to the hassle with Assetify! This handy tool automates asset imports, making your workflow smoother and more efficient.
+Add type-safety to your static `assets` directory.
 
-To generate the assets file, you need to run the `assetize:build` command. Remember to do this each time you make changes to files in the root assets folder.
+Assetify scans your project's root asset folder to give you Typescript autocomplete for your images, videos, fonts, and more, preventing typos and alerting you when your src links are out of date.
 
 ## Example
 
