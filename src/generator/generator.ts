@@ -2,7 +2,7 @@ import _ from "lodash";
 import fs from "node:fs";
 import path from "node:path";
 import prettier from "prettier";
-import { defaultConfigOptions, getConfig } from "../config";
+import { defaultConfigOptions, getConfig, getOutputFileType } from "../config";
 // import { getCodebase } from "../utils";
 import { logger } from "../utils/logger";
 import { Config } from "../config";
@@ -35,23 +35,57 @@ export async function getFileContents() {
   }
 }
 
-export function createAssetItem() {
-  return `
+export async function createAssetItem() {
+  const fileType = await getOutputFileType();
+
+  if (fileType === "ts") {
+    return `
+    /// GENERATED CODE - DO NOT MODIFY BY HAND
+    /// *****************************************************
+    ///  Assetize Generator - DO NOT CHANGE
+    /// *****************************************************
+
+    class AssetItem {
+      private _assetName: string;
+      private _keyName: string;
+      private _ext: string;
+      private _altText: string;
+
+      constructor(assetName: string) {
+        this._assetName = assetName;
+        this._keyName = assetName.split("/").pop()?.split(".")[0]! || assetName;
+        this._ext = assetName.split(".").pop()!;
+        this._altText = this._keyName + " " + " image";
+      }
+
+      get keyName() {
+        return this._keyName;
+      }
+
+      get path() {
+        return this._assetName;
+      }
+
+      get ext(){
+        return this._ext;
+      }
+
+      get altText() {
+        return this._altText;
+      }
+    }`;
+  } else if (fileType === "js") {
+    return `
 /// GENERATED CODE - DO NOT MODIFY BY HAND
 /// *****************************************************
 ///  Assetize Generator - DO NOT CHANGE
 /// *****************************************************
 
 class AssetItem {
-  private _assetName: string;
-  private _keyName: string;
-  private _ext: string;
-  private _altText: string;
-
-  constructor(assetName: string) {
+  constructor(assetName) {
     this._assetName = assetName;
-    this._keyName = assetName.split("/").pop()?.split(".")[0]! || assetName;
-    this._ext = assetName.split(".").pop()!;
+    this._keyName = assetName.split("/").pop().split(".")[0] || assetName;
+    this._ext = assetName.split(".").pop();
     this._altText = this._keyName + " " + " image";
   }
 
@@ -63,14 +97,18 @@ class AssetItem {
     return this._assetName;
   }
 
-  get ext(){
+  get ext() {
     return this._ext;
   }
 
   get altText() {
     return this._altText;
   }
-}`;
+}
+    `;
+  } else {
+    throw new Error("File type not supported");
+  }
 }
 
 export async function createClassRootAssetsDir() {
@@ -145,7 +183,10 @@ export async function createClassFontGen() {
 export async function createMainClassAndExport() {
   const config = await getConfig();
 
-  return `
+  const fileType = await getOutputFileType();
+
+  if (fileType === "ts") {
+    return `
   class ${config.className ?? defaultConfigOptions.className} {
     private constructor() {}
 
@@ -159,6 +200,30 @@ export async function createMainClassAndExport() {
 
   export default ${config.className ?? defaultConfigOptions.className};
   `;
+  } else if (fileType === "js") {
+    return `
+    class ${config.className ?? defaultConfigOptions.className} {
+      constructor() {}
+
+      // private static instance: ${config.className ?? defaultConfigOptions.className};
+
+      static get ${convertCase("root", config.case)}() {
+        return AssetRootGen;
+      }
+      static get ${convertCase("icons", config.case)}() {
+        return AssetsIconsGen;
+      }
+      static get ${convertCase("images", config.case)}() {
+        return AssetsImagesGen;
+      }
+      static get ${convertCase("fonts", config.case)}() {
+        return AssetsFontsGen;
+      }
+    }
+    `;
+  } else {
+    throw new Error("Invalid file type");
+  }
 }
 
 // ${convertCase(

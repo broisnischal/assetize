@@ -112,7 +112,7 @@ export async function getConfigFilePath() {
     );
     process.exit(1);
   }
-
+  k;
   return configResult.filepath;
 }
 
@@ -134,6 +134,11 @@ export async function getConfig() {
   } catch (error) {
     throw new Error("Invalid configuration in " + configResult.filepath);
   }
+}
+
+export async function getOutputFileType(): Promise<"ts" | "js"> {
+  const config = await getConfig();
+  return config.outputFile?.endsWith(".ts") ? "ts" : "js";
 }
 
 export async function setConfig() {}

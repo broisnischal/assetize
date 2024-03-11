@@ -7,7 +7,6 @@ export class AssetClassBuilder {
   private className: string;
   private mainRoute: string;
   private config: Config;
-  // private assets: { name: string; file: string }[];
   private staticget: string;
   private files: string[];
   private outputFileType: "ts" | "js";
@@ -36,7 +35,7 @@ export class AssetClassBuilder {
     const uniqueFileNamesArray: { name: string; file: string }[] = [];
 
     this.files.forEach((file) => {
-      const fileName = file.split(".")[0]!; // Extract the filename without extension
+      const fileName = file.split(".")[0]!;
       if (fileNames.has(fileName)) {
         console.log("double in files");
         const name = `${fileName}_${file.split(".")[1]}`;
