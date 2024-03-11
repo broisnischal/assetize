@@ -112,7 +112,6 @@ export async function getConfigFilePath() {
     );
     process.exit(1);
   }
-  k;
   return configResult.filepath;
 }
 
