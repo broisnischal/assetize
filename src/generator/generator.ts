@@ -234,6 +234,7 @@ export async function createMainClassAndExport() {
 export async function generateFile() {
   try {
     const config = await getConfig();
+    const fileType = await getOutputFileType();
 
     const outputPath = path.join(
       config.output ?? defaultConfigOptions.output,
@@ -254,7 +255,7 @@ export async function generateFile() {
         `;
 
     const formattedCode = await prettier.format(generatedCode, {
-      parser: "typescript",
+      parser: fileType === "ts" ? "typescript" : "babel",
     });
 
     fs.writeFileSync(outputPath, formattedCode);
