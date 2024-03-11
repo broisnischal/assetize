@@ -1,5 +1,11 @@
 # assetize
 
+## 2.1.12
+
+### Patch Changes
+
+- a6754bc: fix
+
 ## 2.1.11
 
 ### Patch Changes
