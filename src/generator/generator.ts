@@ -246,7 +246,7 @@ export async function generateFile() {
     // }
 
     const generatedCode = `
-        ${createAssetItem()}
+        ${await createAssetItem()}
         ${await createClassRootAssetsDir()}
         ${await createClassIconsGen()}
         ${await createClassImageGen()}

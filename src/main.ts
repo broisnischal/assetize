@@ -62,20 +62,24 @@ export async function generateConfigFile() {
             { value: "custom", label: "Custom" },
           ],
         }),
-      lineLength: () =>
-        p.text({
-          message: "Line length",
-          defaultValue: "80",
-          placeholder: "80",
-          initialValue: "80",
-          validate: (value) => (value ? undefined : "Please enter a number"),
-        }),
+      // lineLength: () =>
+      //   p.text({
+      //     message: "Line length",
+      //     defaultValue: "80",
+      //     placeholder: "80",
+      //     initialValue: "80",
+      //     validate: (value) => (value ? undefined : "Please enter a number"),
+      //   }),
       filetype: ({}) =>
         p.select({
-          message: `Pick a config file type.`,
+          message: `Pick a config file type, Ts or Js.`,
           initialValue: "ts",
           options: [
-            { value: "ts", label: "TypeScript", hint: "assetize.config.ts" },
+            {
+              value: "ts",
+              label: "TypeScript",
+              hint: "assetize.config.ts ( recommended )",
+            },
             { value: "js", label: "JavaScript", hint: "assetize.config.js" },
           ],
           maxItems: 1,
@@ -100,6 +104,7 @@ export async function generateConfigFile() {
             {
               label: "Camel Case",
               value: "camel",
+              hint: "recommended",
             },
             {
               label: "Kebab Case",
@@ -134,15 +139,19 @@ export async function generateConfigFile() {
         }),
       outputFileName: () =>
         p.text({
-          message: "Output file name?",
+          message: "Output file name? TS or JS?",
           defaultValue: "assetize.gen.ts",
           initialValue: "assetize.gen.ts",
-          placeholder: "Name for generated file",
+          placeholder: "assetize.gen.ts or assetize.gen.js?",
           validate: (value) => {
             if (value.includes("/"))
               return "Please enter a file name without path.";
 
             if (!value) return "Please enter a file name.";
+
+            if (!value.endsWith(".ts") && !value.endsWith(".js")) {
+              return "Please enter a file name with .ts or .js";
+            }
           },
         }),
       generate: () =>
@@ -160,7 +169,7 @@ export async function generateConfigFile() {
   );
 
   const configCode: Config = {
-    lineLength: Number(project.lineLength),
+    lineLength: 80,
     codebase: project.codebase ?? detectedCodeBase,
     assets: {
       path: project.path,
